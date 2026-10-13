@@ -1,8 +1,8 @@
 "use client"
 
 import Button from "@/components/Button";
-import Image from "next/image";
 import Pointer from "@/components/Pointer";
+import AddProfileCard from "@/components/AddProfileCard";
 import ProfileSidebarCard from "@/components/ProfileSidebarCard";
 import {easeInOut, motion,useAnimate} from "framer-motion"
 import { useEffect } from "react";
@@ -83,33 +83,25 @@ export default function Hero() {
                 initial={{opacity:0 , x:100,y:100}}
                 drag
                 className="absolute -right-64 -top-16 hidden lg:block">
-                    <Image
-                    src="/images/design-example-2.png"
-                    alt="Design example 2 image"
-                    width={440}
-                    height={592}
-                    className="rounded-2xl"
-                    draggable="false"
-                    />
+                    <AddProfileCard />
                 </motion.div>
                
                 <motion.div 
                 ref={rightPointerScope}
                 initial={{opacity:0,x:275,y:100}}
                 className="absolute right-80 -top-4 hidden lg:block">
-                    <Pointer name="Shubham Portfolio" color="red"/>
+                    
                 </motion.div>
-                <div className="flex justify-center">
+                {/* <div className="flex justify-center">
                 <div className="inline-flex py-1 px-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full text-neutral-950 font-semibold">
                     $7.5M seed round raised
                     </div>
-                    </div>
+                    </div> */}
                 <h1 className="text-6xl md:text-7xl lg:text-8xl font-medium text-center mt-6">
-                    Impactful design, created effortlessly
+                    Turning complex problems into elegant solutions.
                     </h1>
-                <p className="text-center text-xl text-white/50 mt-8 max-w-2xl mx-auto">
-                    Design tools shouldn&apos;t slow uou down. Layers combines powerful features with an intutive interface
-                    that keeps in your creative flow
+                <p className="text-center text-xl text-foreground/70 mt-8 max-w-2xl mx-auto">
+                    I&apos;m a full-stack developer and AI enthusiast building scalable applications and intelligent products. I love exploring new technologies, solving challenging problems, and bringing ambitious ideas to life through code.
                  </p>
                  <form className="flex border border-white/15 rounded-full p-2 mt-8 max-w-lg mx-auto">
                     <input 
