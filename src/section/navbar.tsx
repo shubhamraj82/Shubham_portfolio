@@ -19,7 +19,7 @@ export default function Navbar() {
         <>
         <section className="py-4 lg:py-8 fixed w-full top-0 z-50">
             <div className="container mx-auto max-w-5xl">
-                <div className="border border-black rounded-[27px]  md:rounded-full bg-white backdrop-blur">
+                <div className="border-[3px] border-black rounded-[27px]  md:rounded-full bg-white backdrop-blur">
                 <div className="grid grid-cols-2 lg:grid-cols-3 p-2 px-4 md:pr-2 items-center ">
                     <div className="flex items-center gap-2 font-semibold">
                         <Layers aria-hidden="true" className="size-6" />
