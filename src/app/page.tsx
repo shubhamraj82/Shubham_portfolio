@@ -1,6 +1,7 @@
 import Hero from "@/section/Hero";
 import Projects from "../section/Projects";
 import Navbar from "../section/navbar";
+import Skill from "@/section/Skill";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <Hero />
       </main>
       <Projects />
+      <Skill/>
     </>
   );
 }
