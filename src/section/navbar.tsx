@@ -2,7 +2,7 @@
 
 import  Button  from "@/components/Button";
 import { AnimatePresence,motion } from "framer-motion"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { Layers } from "lucide-react";
 
@@ -15,11 +15,34 @@ const navLinks=[
 
 export default function Navbar() {
     const [isOpen , setIsOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const updateScrollState = () => setIsScrolled(window.scrollY > 8);
+        updateScrollState();
+        window.addEventListener("scroll", updateScrollState, { passive: true });
+        return () => window.removeEventListener("scroll", updateScrollState);
+    }, []);
+
     return (
         <>
-        <section className="py-4 lg:py-8 fixed w-full top-0 z-50">
+        <section
+            className="fixed top-0 z-50 w-full py-4 transition-all duration-300 lg:py-8"
+            style={isScrolled ? {
+                backgroundColor: "rgba(255, 255, 255, 0.12)",
+                backdropFilter: "blur(18px)",
+                WebkitBackdropFilter: "blur(18px)",
+                borderBottom: "1px solid rgba(15, 23, 42, 0.10)",
+                boxShadow: "0 8px 24px rgba(15, 23, 42, 0.08)",
+            } : undefined}
+        >
             <div className="container mx-auto max-w-5xl">
-                <div className="border-[3px] border-black rounded-[27px]  md:rounded-full bg-white backdrop-blur">
+                <div className={twMerge(
+                    "rounded-[27px] border-[3px] transition-all duration-300 md:rounded-full",
+                    isScrolled
+                        ? "border-black/25 bg-white/12 shadow-lg shadow-black/10 backdrop-blur-2xl"
+                        : "border-black bg-white",
+                )}>
                 <div className="grid grid-cols-2 lg:grid-cols-3 p-2 px-4 md:pr-2 items-center ">
                     <div className="flex items-center gap-2 font-semibold">
                         <Layers aria-hidden="true" className="size-6" />
