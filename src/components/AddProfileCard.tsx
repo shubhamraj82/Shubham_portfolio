@@ -26,7 +26,7 @@ export default function AddProfileCard() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="h-[564px] w-[432px] rounded-2xl bg-[#171717] px-10 pt-9 pb-8 text-white shadow-2xl"
+      className="h-[564px] w-[432px] rounded-2xl border-2 border-sky-300/70 bg-[#171717]/65 px-10 pt-9 pb-8 text-white shadow-[0_5px_0_rgba(37,99,235,0.55),0_18px_40px_rgba(2,132,199,0.28),inset_0_1px_0_rgba(255,255,255,0.28)] backdrop-blur-xl"
     >
       <h2 className="text-[24px] font-semibold leading-8">Add profile</h2>
 
@@ -39,9 +39,17 @@ export default function AddProfileCard() {
         >
           {imageUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={imageUrl} alt="Profile preview" className="size-full object-cover" />
+            <img
+              src={imageUrl}
+              alt="Profile preview"
+              className="size-full object-cover"
+            />
           ) : (
-            <ImageIcon aria-hidden="true" className="size-7" strokeWidth={1.8} />
+            <ImageIcon
+              aria-hidden="true"
+              className="size-7"
+              strokeWidth={1.8}
+            />
           )}
         </button>
         <input
@@ -83,8 +91,12 @@ export default function AddProfileCard() {
         onClick={() => setIsKidsProfile((value) => !value)}
         className="mt-[30px] flex items-center gap-4 text-left text-[16px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
       >
-        <span className={`relative h-4 w-[50px] border-2 transition-colors ${isKidsProfile ? "border-[#a2e52d]" : "border-[#454545]"}`}>
-          <span className={`absolute -top-[5px] size-[26px] rounded-full transition-all ${isKidsProfile ? "left-[22px] bg-[#a2e52d]" : "left-[-3px] bg-[#555555]"}`} />
+        <span
+          className={`relative h-4 w-[50px] border-2 transition-colors ${isKidsProfile ? "border-[#a2e52d]" : "border-[#454545]"}`}
+        >
+          <span
+            className={`absolute -top-[5px] size-[26px] rounded-full transition-all ${isKidsProfile ? "left-[22px] bg-[#a2e52d]" : "left-[-3px] bg-[#555555]"}`}
+          />
         </span>
         Kid’s profile
       </button>

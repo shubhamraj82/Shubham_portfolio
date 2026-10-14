@@ -97,10 +97,15 @@ export default function Hero() {
                     $7.5M seed round raised
                     </div>
                     </div> */}
-                <h1 className="text-6xl md:text-7xl lg:text-8xl font-medium text-center mt-6">
-                    Turning complex problems into elegant solutions.
-                    </h1>
-                <p className="text-center text-xl text-foreground/70 mt-8 max-w-2xl mx-auto">
+                <p className="text-center text-lg md:text-xl text-foreground/60 mt-6">
+                    Hi, I&apos;m Shubham Raj <span aria-hidden="true">👋</span>
+                </p>
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] text-center mt-4">
+                    Building Solutions,<br />
+                    Solving <span className="bg-gradient-to-r from-sky-500 to-violet-600 bg-clip-text text-transparent">Real-World</span><br />
+                    Problems.
+                </h1>
+                <p className="text-center text-xl text-neutral-950 mt-8 max-w-2xl mx-auto">
                     I&apos;m a full-stack developer and AI enthusiast building scalable applications and intelligent products. I love exploring new technologies, solving challenging problems, and bringing ambitious ideas to life through code.
                  </p>
                  <form className="flex border border-white/15 rounded-full p-2 mt-8 max-w-lg mx-auto">
