@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Next.js">
+  <circle cx="64" cy="64" r="58" fill="#000"/>
+  <path fill="#fff" d="M35 91V37h10l34 40V37h12v54H81L47 51v40H35Z"/>
+  <text x="91" y="98" fill="#fff" font-family="Arial,sans-serif" font-size="24" font-weight="700" text-anchor="middle">js</text>
+</svg>

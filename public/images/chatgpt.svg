@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="ChatGPT">
+  <g fill="none" stroke="#10A37F" stroke-linecap="round" stroke-linejoin="round" stroke-width="8">
+    <path d="M64 20c13 0 23 10 23 23v9M64 20 48 29c-8 5-11 15-7 24l5 8"/>
+    <path d="M102 42c7 11 3 25-8 32l-8 5M102 42l-16-9c-9-5-20-2-25 6l-4 8"/>
+    <path d="M102 86c-7 11-21 14-32 7l-8-5M102 86V67c0-10-8-18-18-18h-9"/>
+    <path d="M64 108c-13 0-23-10-23-23v-9M64 108l16-9c8-5 11-15 7-24l-5-8"/>
+    <path d="M26 86c-7-11-3-25 8-32l8-5M26 86l16 9c9 5 20 2 25-6l4-8"/>
+    <path d="M26 42c7-11 21-14 32-7l8 5M26 42v19c0 10 8 18 18 18h9"/>
+  </g>
+</svg>

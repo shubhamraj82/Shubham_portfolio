@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Java">
+  <path fill="none" stroke="#E76F00" stroke-linecap="round" stroke-width="5" d="M63 14c-17 13 20 15 0 29-14 10 17 12 2 24"/>
+  <path fill="none" stroke="#E76F00" stroke-linecap="round" stroke-width="4" d="M77 20c-12 10 12 12 0 21"/>
+  <path fill="#5382A1" d="M26 68c17 8 59 8 76 0l-4 11c-17 10-51 10-68 0l-4-11Zm8 20c18 7 42 7 60 0l-5 10c-16 8-34 8-50 0l-5-10Zm3 18c14 6 29 6 43 0l-5 9c-11 5-22 5-33 0l-5-9Z"/>
+  <path fill="none" stroke="#5382A1" stroke-linecap="round" stroke-width="4" d="M19 73c-7 4-7 8 0 12m90-12c7 4 7 8 0 12"/>
+</svg>
