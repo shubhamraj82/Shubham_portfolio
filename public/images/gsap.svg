@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="GSAP">
+  <path fill="#88CE02" d="M64 8 76 39l30-15-15 30 29 10-29 10 15 30-30-15-12 31-12-31-30 15 15-30L8 64l29-10-15-30 30 15L64 8Z"/>
+  <circle cx="64" cy="64" r="24" fill="#0B0F0C"/>
+  <path fill="#88CE02" d="M51 57h16v7H59v7h10v-5h-5v-6h13v18H51V57Z"/>
+</svg>

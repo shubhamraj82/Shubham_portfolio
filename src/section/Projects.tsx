@@ -1,235 +1,243 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, Code2, ExternalLink } from "lucide-react";
+import { useRef, useState } from "react";
+import {
+  ArrowUpRight,
+  Code2,
+  ExternalLink,
+  Globe2,
+} from "lucide-react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const filters = ["Web", "Mobile", "AI"] as const;
 type ProjectCategory = (typeof filters)[number];
-
-const projects: {
+type Project = {
   name: string;
   description: string;
   technologies: string[];
   category: ProjectCategory;
-  previewImage: string;
+  previewImage?: string;
   demoLabel: string;
-}[] = [
+};
+
+const projects: Project[] = [
   {
-    name: "AGENTSURF",
+    name: "Agentsurf",
     description:
-      "AgentSurf is a visual browser-automation platform for building, running, and observing AI-powered workflows. Create a workflow on a node-based canvas, connect browser and communication steps, and run the graph as a durable background task.",
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Clerk",
-      "PostgreSQL",
-      "Browserbase",
-      "Liveblocks",
-      "Trigger",
-      "Resend",
-      "Polar",
-    ],
+      "A visual browser-automation platform for building, running, and observing AI-powered workflows. Create a workflow on a node-based canvas, connect browser and communication steps, and run the graph as a durable background task.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Clerk", "PostgreSQL", "Browserbase", "Liveblocks", "Trigger", "Resend", "Polar"],
     category: "Web",
-    previewImage: "/images/Neon%20Workflow%20Editor%20at%20Night.png",
+    previewImage: "/images/Neon Workflow Editor at Night.png",
     demoLabel: "Live Demo",
   },
   {
-    name: "RESONANCE",
+    name: "Resonance",
     description:
-      "Resonance is a multi-tenant text-to-speech workspace for turning written content into audio. Users work inside a Clerk organization, choose built-in or organization-owned voices, tune generation parameters, and listen to generated audio.",
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "PostgreSQL",
-      "Prisma",
-      "Clerk",
-      "Tailwind CSS",
-      "tRPC",
-      "Cloudflare R2",
-      "ChatterBox-TTS",
-      "Polar",
-    ],
+      "A multi-tenant text-to-speech workspace for turning written content into expressive audio, with organization-owned voices and a focused listening experience.",
+    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Clerk", "Cloudflare R2", "ChatterBox-TTS"],
     category: "Web",
-    previewImage: "/images/Resonance%20AI%20Dashboard%20Interface.png",
+    previewImage: "/images/Resonance AI Dashboard Interface.png",
     demoLabel: "Live Demo",
   },
   {
-    name: "REQUESTLY",
+    name: "Requestly",
     description:
-      "Requestly is a multi-organization API testing and collaboration platform inspired by Postman, featuring built-in AI to simplify API development, automate workflows, and accelerate debugging. Designed with organization-based workspaces, team collaboration, and intelligent API assistance to help developers manage, test, and document APIs more efficiently.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Better Auth", "PostgreSQL", "Prisma", "tRPC",],
+      "A collaborative API workspace with team workspaces, clear request organization, and AI assistance to speed up testing and debugging.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Better Auth", "PostgreSQL", "Prisma", "tRPC"],
     category: "Web",
-    previewImage: "/images/Neon%20AI-Powered%20API%20Workspace.png",
+    previewImage: "/images/Neon AI-Powered API Workspace.png",
     demoLabel: "View Details",
   },
-  // {
-  //   name: "Fake News Detection",
-  //   description:
-  //     "A machine learning and NLP system to detect fake news articles using traditional ML models and deep learning techniques.",
-  //   technologies: [
-  //     "Python",
-  //     "Scikit-learn",
-  //     "TensorFlow",
-  //     "Flask",
-  //     "NLTK",
-  //     "SQL",
-  //   ],
-  //   category: "AI",
-  //   previewPosition: "55.2% 69.8%",
-  //   demoLabel: "View Details",
-  // },
+  {
+    name: "Aura Brand Identity",
+    description:
+      "A personal identity exploration shaped around a calm, modern visual system, with a flexible mark, refined typography, and a cohesive digital presence.",
+    technologies: ["Figma", "Illustrator", "Photoshop", "Brand Strategy", "Visual Design"],
+    category: "Mobile",
+    demoLabel: "View Details",
+  },
+  {
+    name: "Pocket Places",
+    description:
+      "A mobile guide for saving favorite places, organizing them into personal lists, and finding a great spot while on the move.",
+    technologies: ["React Native", "Expo", "TypeScript", "Maps", "NativeWind"],
+    category: "Mobile",
+    demoLabel: "Live Demo",
+  },
+  {
+    name: "Daily Form",
+    description:
+      "A gentle habit and wellness companion that turns small daily check-ins into clear, encouraging progress over time.",
+    technologies: ["React Native", "Expo", "TypeScript", "Firebase", "Figma"],
+    category: "Mobile",
+    demoLabel: "View Details",
+  },
+  {
+    name: "Solaris Digital",
+    description:
+      "A client project for a clean-energy studio, bringing its solar services, project portfolio, and customer journey together in a confident digital experience.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Figma"],
+    category: "AI",
+    demoLabel: "Live Demo",
+  },
+  {
+    name: "Workflow Copilot",
+    description:
+      "An AI assistant that turns plain-language goals into practical, reviewable workflow steps and helps teams automate routine work.",
+    technologies: ["Python", "OpenAI API", "FastAPI", "PostgreSQL", "LangChain"],
+    category: "AI",
+    demoLabel: "View Details",
+  },
+  {
+    name: "Knowledge Lens",
+    description:
+      "A conversational knowledge tool that helps people explore their documents and get grounded answers with useful source context.",
+    technologies: ["Next.js", "TypeScript", "Embeddings", "Vector Search", "PostgreSQL"],
+    category: "AI",
+    demoLabel: "View Details",
+  },
 ];
+
+function StackedProjectCard({
+  project,
+  index,
+  total,
+  progress,
+}: {
+  project: Project;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const targetScale = 1 - (total - 1 - index) * 0.03;
+  const start = index / Math.max(total - 1, 1);
+  const end = (index + 1) / Math.max(total - 1, 1);
+  const scale = useTransform(progress, [start, end], [1, targetScale]);
+
+  return (
+    <motion.article
+      style={{ scale, top: `calc(6rem + ${index * 28}px)`, zIndex: index + 1 }}
+      className="sticky mx-auto h-[85vh] min-h-[520px] w-full max-w-5xl origin-top rounded-[40px] border-2 border-[#D7E2EA] bg-[#111416] p-4 shadow-[0_22px_70px_rgba(0,0,0,0.45)] sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
+      aria-labelledby={`project-${project.name.replaceAll(" ", "-")}`}
+    >
+      {project.previewImage ? (
+        <div className="relative h-[42vh] min-h-[250px] max-h-[420px] overflow-hidden rounded-[26px] border border-white/10 bg-[#171d21] sm:rounded-[34px] md:rounded-[42px]">
+          {/* Local project previews are supplied in public/images. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={project.previewImage}
+            alt={`${project.name} project preview`}
+            className="h-full w-full object-cover"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+        </div>
+      ) : (
+        <div
+          role="img"
+          aria-label={`${project.name} image placeholder`}
+          className="flex h-[42vh] min-h-[250px] max-h-[420px] items-end rounded-[26px] border border-dashed border-[#D7E2EA]/25 bg-[radial-gradient(ellipse_at_75%_15%,rgba(111,157,176,0.2),transparent_42%),linear-gradient(135deg,#171d21,#101214)] p-4 text-xs uppercase tracking-[0.22em] text-slate-500 sm:rounded-[34px] sm:p-6 md:rounded-[42px]"
+        >
+          Project image placeholder
+        </div>
+      )}
+
+      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto pt-4 sm:pt-5 md:pt-6">
+        <div className="flex items-center justify-between gap-3">
+          <h3 id={`project-${project.name.replaceAll(" ", "-")}`} className="text-xl font-semibold tracking-tight text-white sm:text-2xl md:text-3xl">
+            {project.name}
+          </h3>
+          <a
+            href="#projects"
+            aria-label={`Open ${project.name} project`}
+            className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-white/15 text-slate-300 transition hover:border-[#D7E2EA]/60 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D7E2EA] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111416]"
+          >
+            <ArrowUpRight aria-hidden="true" className="size-4" />
+          </a>
+        </div>
+        <p className="mt-3 max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-[15px] md:mt-4 md:text-base">
+          {project.description}
+        </p>
+        <ul className="mt-4 flex flex-wrap gap-1.5 sm:mt-5 sm:gap-2" aria-label={`${project.name} technologies and tools`}>
+          {project.technologies.map((technology) => (
+            <li key={technology} className="rounded-full border border-white/10 bg-white/[0.035] px-2.5 py-1 text-[10px] leading-4 text-slate-300 sm:px-3 sm:text-xs">
+              {technology}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-auto flex flex-wrap gap-2.5 pt-5 sm:gap-3 sm:pt-6">
+          <a href="#projects" className="inline-flex h-9 items-center gap-2 rounded-full bg-[#D7E2EA] px-3.5 text-xs font-semibold text-[#111416] transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#111416] sm:h-10 sm:px-4 sm:text-sm">
+            <ExternalLink aria-hidden="true" className="size-3.5" /> {project.demoLabel}
+          </a>
+          <a href="#projects" aria-label={`${project.name} GitHub repository`} className="inline-flex h-9 items-center gap-2 rounded-full border border-[#D7E2EA]/45 px-3.5 text-xs font-medium text-white transition hover:border-[#D7E2EA] hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D7E2EA] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111416] sm:h-10 sm:px-4 sm:text-sm">
+            <Code2 aria-hidden="true" className="size-3.5" /> GitHub
+          </a>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+function ProjectStack({ items }: { items: Project[] }) {
+  const container = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: container, offset: ["start start", "end end"] });
+
+  return (
+    <div ref={container} className="relative mt-9 pb-20 sm:mt-12 sm:pb-24">
+      {items.map((project, index) => (
+        <StackedProjectCard
+          key={project.name}
+          project={project}
+          index={index}
+          total={items.length}
+          progress={scrollYProgress}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("Web");
-  const visibleProjects = projects.filter(
-    (project) => project.category === activeFilter,
-  );
+  const visibleProjects = projects.filter((project) => project.category === activeFilter);
 
   return (
     <section
       id="projects"
-      className="dark relative scroll-mt-8 overflow-hidden bg-[#080d10] px-5 py-20 text-white sm:px-8 lg:px-10 lg:py-24"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(116, 145, 151, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(116, 145, 151, 0.045) 1px, transparent 1px), radial-gradient(ellipse at 50% 45%, rgba(18, 39, 42, 0.22), transparent 70%)",
-        backgroundSize: "160px 160px, 160px 160px, auto",
-      }}
+      className="dark relative z-10 -mt-10 scroll-mt-8 rounded-t-[40px] bg-[#0C0C0C] px-4 pb-10 pt-14 font-[family-name:var(--font-kanit)] text-white sm:-mt-12 sm:rounded-t-[50px] sm:px-7 sm:pt-16 md:-mt-14 md:rounded-t-[60px] md:px-10 md:pt-20"
     >
-      <div className="relative mx-auto w-full max-w-[92rem]">
-        <div className="text-center">
-          <h2 className="text-5xl font-semibold tracking-tight sm:text-6xl">
-            Featured <span className="text-blue-400">Projects</span>
+      <div className="mx-auto w-full max-w-[92rem]">
+        <header className="text-center">
+          <h2 className="bg-[linear-gradient(180deg,#646973_0%,#BBCCD7_100%)] bg-clip-text text-4xl font-bold uppercase tracking-[0.12em] text-transparent sm:text-5xl md:text-6xl">
+            Project
           </h2>
-          <p className="mx-auto mt-4 max-w-[640px] text-base leading-relaxed text-slate-400">
-            Real-world products built end to end — with a focus on scalability,
-            performance, and the small details that make software feel good to
-            use.
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-400 sm:mt-4 sm:text-base">
+            A selection of digital products, experiences, and experiments built with care.
           </p>
-        </div>
+        </header>
 
-        <Tabs
-          value={activeFilter}
-          onValueChange={(value) => setActiveFilter(value as ProjectCategory)}
-          className="mt-10 items-center"
-        >
-          <TabsList
-            aria-label="Filter projects"
-            className="h-10 rounded-full border border-slate-700/60 bg-slate-900/60 p-1 backdrop-blur"
-          >
+        <Tabs value={activeFilter} onValueChange={(value) => setActiveFilter(value as ProjectCategory)} className="mt-7 items-center sm:mt-9">
+          <TabsList aria-label="Project categories" className="h-10 rounded-full border border-white/10 bg-[#151719] p-1">
             {filters.map((filter) => (
-              <TabsTrigger
-                key={filter}
-                value={filter}
-                className="rounded-full px-6 text-slate-400 data-active:border-blue-400/40 data-active:bg-blue-500/10 data-active:text-blue-300 data-active:shadow-[0_0_14px_rgba(96,165,250,0.25)]"
-              >
+              <TabsTrigger key={filter} value={filter} className="rounded-full px-5 text-slate-400 data-active:bg-[#D7E2EA] data-active:text-[#101214] sm:px-6">
                 {filter}
               </TabsTrigger>
             ))}
           </TabsList>
         </Tabs>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-3 lg:gap-8">
-          {visibleProjects.map((project) => (
-            <Card
-              key={project.name}
-              className="group relative grid gap-6 rounded-xl border border-blue-400/15 bg-slate-950/40 p-5 ring-0 shadow-[0_0_0_1px_rgba(96,165,250,0.05),0_0_28px_-14px_rgba(96,165,250,0.35)] transition-all duration-300 hover:border-blue-400/40 hover:shadow-[0_0_0_1px_rgba(96,165,250,0.15),0_0_44px_-10px_rgba(96,165,250,0.45)] sm:p-6"
-            >
-              <div
-                role="img"
-                aria-label={`${project.name} project preview`}
-                className="min-h-[230px] rounded-lg border border-slate-700/50 bg-[#0d141b] bg-no-repeat transition-colors group-hover:border-blue-400/25 md:min-h-[280px]"
-                style={{
-                  backgroundImage: `url('${project.previewImage}')`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              />
-              <div className="flex min-w-0 flex-col py-1">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-2xl font-semibold tracking-tight text-white">
-                    {project.name}
-                  </h3>
-                  <Button
-                    asChild
-                    variant="ghost"
-                    size="icon-sm"
-                    className="text-slate-400 hover:bg-transparent hover:text-blue-300"
-                  >
-                    <a href="#projects" aria-label={`Open ${project.name}`}>
-                      <ExternalLink aria-hidden="true" />
-                    </a>
-                  </Button>
-                </div>
-                <p className="mt-3 text-[15px] leading-relaxed text-slate-400">
-                  {project.description}
-                </p>
-                <ul
-                  className="mt-5 flex flex-wrap gap-2"
-                  aria-label="Technologies"
-                >
-                  {project.technologies.map((technology) => (
-                    <li key={technology}>
-                      <Badge
-                        variant="secondary"
-                        className="h-auto rounded-md border-slate-700/50 bg-slate-800/60 px-2.5 py-1 text-slate-200"
-                      >
-                        {technology}
-                      </Badge>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto flex flex-wrap gap-3 pt-6">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="h-10 bg-white px-4 text-slate-950 hover:bg-blue-100"
-                  >
-                    <a href="#projects">
-                      <ExternalLink aria-hidden="true" />
-                      {project.demoLabel}
-                    </a>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="lg"
-                    className="h-10 border-slate-700 bg-transparent px-4 text-white hover:border-slate-500 hover:bg-slate-800/40 hover:text-white"
-                  >
-                    <a
-                      href="#projects"
-                      aria-label={`${project.name} on GitHub`}
-                    >
-                      <Code2 aria-hidden="true" />
-                      GitHub
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
+        <ProjectStack key={activeFilter} items={visibleProjects} />
 
-        <div className="mt-12 flex items-center justify-center gap-8">
-          <span className="hidden h-px w-40 bg-gradient-to-r from-transparent to-slate-700 sm:block" />
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="h-11 rounded-full border-slate-700 bg-transparent px-7 text-white shadow-[0_0_18px_-8px_rgba(96,165,250,0.4)] hover:border-blue-400/60 hover:bg-blue-500/5 hover:text-white hover:shadow-[0_0_24px_-6px_rgba(96,165,250,0.55)]"
-          >
-            <a href="#projects">
-              View All Projects
-              <ArrowRight aria-hidden="true" className="text-blue-300" />
-            </a>
-          </Button>
-          <span className="hidden h-px w-40 bg-gradient-to-l from-transparent to-slate-700 sm:block" />
+        <div className="flex justify-center pb-10">
+          <a href="#projects" className="inline-flex h-11 items-center gap-2 rounded-full border border-white/20 px-6 text-sm font-medium text-white transition hover:border-[#D7E2EA]/70 hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D7E2EA] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C0C0C]">
+            Explore more projects <Globe2 aria-hidden="true" className="size-4" />
+          </a>
         </div>
       </div>
     </section>

@@ -30,6 +30,11 @@ const integrations = [
     description: "Build lightweight web servers and APIs with Node.js.",
   },
   {
+    name: "Framer Motion",
+    icon: "/images/framerMotion.svg",
+    description: "Create fluid animations and transitions for React interfaces.",
+  },
+  {
     name: "Gemini",
     icon: "/images/gemini.svg",
     description:
@@ -39,6 +44,11 @@ const integrations = [
     name: "GitHub",
     icon: "/images/github.svg",
     description: "Manage source code and collaborate through version control.",
+  },
+  {
+    name: "GSAP",
+    icon: "/images/gsap.svg",
+    description: "Build precise, high-performance animations for the web.",
   },
   {
     name: "JavaScript",
@@ -110,21 +120,13 @@ export type IntegrationsType = typeof integrations;
 export default function Skill() {
   return (
     <section
-      className="dark relative isolate overflow-hidden bg-[#080a0e]/95 px-5 py-24 text-white backdrop-blur-sm sm:px-8 lg:px-10 lg:py-32"
+      className="dark relative isolate overflow-hidden bg-[#080d10] px-5 py-24 text-white sm:px-8 lg:px-10 lg:py-32"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px)",
-        backgroundSize: "120px 120px",
+          "linear-gradient(rgba(116, 145, 151, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(116, 145, 151, 0.045) 1px, transparent 1px), radial-gradient(ellipse at 50% 45%, rgba(18, 39, 42, 0.22), transparent 70%)",
+        backgroundSize: "160px 160px, 160px 160px, auto",
       }}
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-12 -z-10 size-[28rem] rounded-full bg-blue-500/15 blur-[140px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-40 left-[12%] -z-10 size-[24rem] rounded-full bg-indigo-500/10 blur-[130px]"
-      />
       <div className="container relative mx-auto max-w-7xl">
         <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div className="lg:sticky lg:top-32">
