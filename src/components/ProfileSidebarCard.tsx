@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ComponentType, type ReactNode } from "react";
 import { FileDown, Plus, UserRound } from "lucide-react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -10,6 +10,36 @@ import {
   TwitterIcon,
 } from "@hugeicons/core-free-icons";
 import AnimatedList from "./AnimatedList";
+
+type ProfileMenuItem = {
+  label: string;
+  icon?: typeof UserRound | typeof FileDown;
+  brandIcon?: (typeof GithubIcon) | (typeof InstagramIcon) | (typeof Linkedin01Icon) | (typeof TwitterIcon);
+};
+
+type ProfileAnimatedListProps = {
+  items: ProfileMenuItem[];
+  onItemSelect: (item: ProfileMenuItem, index: number) => void;
+  renderItem: (item: ProfileMenuItem, index: number, selected: boolean) => ReactNode;
+  initialSelectedIndex?: number;
+  animation?: string;
+  animateOnce?: boolean;
+  stagger?: number;
+  selectOnHover?: boolean;
+  enableArrowNavigation?: boolean;
+  theme?: "dark";
+  accentColor?: string;
+  frame?: boolean;
+  displayScrollbar?: boolean;
+  showGradients?: boolean;
+  gap?: number;
+  radius?: number;
+  width?: number;
+  maxHeight?: number;
+  itemClassName?: string;
+};
+
+const ProfileAnimatedList = AnimatedList as unknown as ComponentType<ProfileAnimatedListProps>;
 
 const menuItems = [
   { label: "About me", icon: UserRound },
@@ -45,14 +75,14 @@ export default function ProfileSidebarCard() {
       <button
         type="button"
         onClick={() => setMessage("Portfolio selected")}
-        className="mt-7 flex h-[64px] w-full items-center justify-center gap-3 rounded-xl bg-[#1687ff] text-[20px] font-medium text-white transition-colors hover:bg-[#3698ff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white uppercase"
+        className="mt-7 flex h-[64px] w-full items-center justify-center gap-3 rounded-full bg-gradient-to-b from-[#247cff] to-[#0755e8] font-serif text-[20px] font-medium uppercase tracking-[-0.03em] text-white shadow-[inset_0_1px_rgba(255,255,255,.4),0_7px_14px_rgba(25,92,230,.3)] transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
         <Plus aria-hidden="true" className="size-6 " />
         View portfolio
       </button>
 
       <nav aria-label="Portfolio sections" className="mt-5">
-        <AnimatedList
+        <ProfileAnimatedList
           items={menuItems}
           onItemSelect={(item) => {
             setMessage(`${item.label} selected`);
@@ -96,7 +126,7 @@ export default function ProfileSidebarCard() {
           showGradients={false}
           gap={4}
           radius={10}
-          width="100%"
+          width={376}
           maxHeight={282}
           itemClassName="!min-h-[47px] !py-2"
         />

@@ -1,7 +1,6 @@
 "use client"
 
 import Button from "@/components/Button";
-import Pointer from "@/components/Pointer";
 import AddProfileCard from "@/components/AddProfileCard";
 import ProfileSidebarCard from "@/components/ProfileSidebarCard";
 import TechText from "@/components/TechText";
@@ -10,7 +9,6 @@ import { useEffect } from "react";
 
 export default function Hero() {
     const [leftDesignscope,leftDesignanimate] = useAnimate();
-    const [leftPointerscope,leftPointeranimate] = useAnimate();
     const [rightDesignScope,rightDesignAnimate]=useAnimate();
     const [rightPointerScope,rightPointerAnimate]=useAnimate();
     
@@ -22,14 +20,6 @@ export default function Hero() {
             [leftDesignscope.current,{y:0,x:0},{duration:0.5}]
         ]
     );
-        leftPointeranimate(
-            [
-            [leftPointerscope.current,{opacity:1},{duration:0.5}],
-            [leftPointerscope.current, {y:0,x:-100}, {duration:0.5}],
-            [leftPointerscope.current,{x:0,y:[0,16,0]},{duration:0.5, ease:easeInOut}]
-        ]
-    );
-
         rightDesignAnimate([
             [
                 rightDesignScope.current,
@@ -54,17 +44,13 @@ export default function Hero() {
     }, [
         leftDesignanimate,
         leftDesignscope,
-        leftPointeranimate,
-        leftPointerscope,
         rightDesignAnimate,
         rightDesignScope,
         rightPointerAnimate,
         rightPointerScope,
     ])
     return (
-        <section className="py-24 overflow-x-clip" style={{
-            cursor:"url('/images/cursor-you.svg'), auto"
-        }}>
+        <section className="py-24 overflow-x-clip">
             <div className="container relative mx-auto">
                 <motion.div 
                 ref={leftDesignscope} 
@@ -72,12 +58,6 @@ export default function Hero() {
                 initial={{opacity:0, y:100,x:-100}}
                 className="absolute left-0 top-16 hidden cursor-grab active:cursor-grabbing lg:block">
                     <ProfileSidebarCard />
-                </motion.div>
-                <motion.div 
-                ref={leftPointerscope}
-                 initial={{opacity:0, y:100,x:-200}}
-                className="absolute left-56 top-96 hidden lg:block">
-                    <Pointer name="Shubham"/>
                 </motion.div>
                 <motion.div
                 ref={rightDesignScope}
@@ -101,28 +81,28 @@ export default function Hero() {
                 <p className="text-center text-lg md:text-xl text-foreground/60 mt-6">
                     Hi, I&apos;m Shubham Raj <span aria-hidden="true">👋</span>
                 </p>
-                <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight leading-[1.05] text-center mt-4 text-black">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight leading-[1.05] text-center mt-4 text-black">
                     <span className="sr-only">Building Solutions, Solving Real-World Problems.</span>
                     <span aria-hidden="true" className="block">
                         <span className="block h-[1.05em]">
-                            <TechText text="BUILDING SOLUTIONS," fontWeight={700} fontSize={88} letterSpacing={-0.05}
+                            <TechText text="BUILDING SOLUTIONS," fontWeight={700} fontSize={96} letterSpacing={-0.05}
                                 color="currentColor" accentColor="#2563eb" reveal="letter" specks={12} intro="none"
                                 guides={false} style={{ height: "100%" }} />
                         </span>
                         <span className="flex h-[1.05em] items-center justify-center gap-0">
-                            <span className="inline-block h-full w-[3.25em] shrink-0 align-top">
-                                <TechText text="SOLVING" fontWeight={700} fontSize={88} letterSpacing={-0.05}
+                            <span className="inline-block h-full w-[3.01em] shrink-0 align-top">
+                                <TechText text="SOLVING" fontWeight={700} fontSize={96} letterSpacing={-0.05}
                                     color="currentColor" accentColor="#2563eb" reveal="letter" specks={12} intro="none"
                                     guides={false} style={{ height: "100%" }} />
                             </span>
-                            <span className="inline-block h-full w-[6.55em] shrink-0 align-top">
-                                <TechText text="REAL-WORLD" fontWeight={700} fontSize={88} letterSpacing={-0.05}
+                            <span className="inline-block h-full w-[6.25em] shrink-0 align-top">
+                                <TechText text="REAL-WORLD" fontWeight={700} fontSize={96} letterSpacing={-0.05}
                                     color="#2563eb" accentColor="#111827" reveal="letter" specks={12} intro="none"
                                     guides={false} style={{ height: "100%" }} />
                             </span>
                         </span>
                         <span className="block h-[1.05em]">
-                            <TechText text="PROBLEMS." fontWeight={700} fontSize={88} letterSpacing={-0.05}
+                            <TechText text="PROBLEMS." fontWeight={700} fontSize={96} letterSpacing={-0.05}
                                 color="currentColor" accentColor="#2563eb" reveal="letter" specks={12} intro="none"
                                 guides={false} style={{ height: "100%" }} />
                         </span>

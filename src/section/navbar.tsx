@@ -42,10 +42,10 @@ export default function Navbar() {
         >
             <div className="mx-auto max-w-[1240px]">
                 <div className={twMerge(
-                    "overflow-hidden rounded-[28px] border border-white/70 bg-white/60 text-[#111111] shadow-[0_12px_35px_rgba(15,23,42,0.14)] backdrop-blur-xl transition-all duration-300 md:rounded-full",
+                    "overflow-hidden rounded-[28px] border text-[#111111] backdrop-blur-xl transition-all duration-300 md:rounded-full",
                     isScrolled
-                        ? "bg-white/72 shadow-[0_16px_40px_rgba(15,23,42,0.2)]"
-                        : "",
+                        ? "border-white/15 bg-[#080d10]/40 text-white shadow-[0_16px_40px_rgba(0,0,0,0.25)]"
+                        : "border-white/70 bg-white/60 shadow-[0_12px_35px_rgba(15,23,42,0.14)]",
                 )}>
                 <div className="grid grid-cols-2 items-center px-5 py-3 sm:px-7 lg:grid-cols-3 lg:px-8 lg:py-3.5">
                     <a href="#" className="flex w-fit items-center gap-2.5 font-serif text-[21px] font-bold tracking-[-0.04em] sm:text-[24px]">

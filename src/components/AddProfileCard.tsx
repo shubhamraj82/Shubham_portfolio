@@ -109,7 +109,7 @@ export default function AddProfileCard() {
 
       <button
         type="submit"
-        className="mt-[34px] h-[54px] w-full rounded-xl bg-[#1687ff] text-[16px] font-semibold text-white transition-colors hover:bg-[#3698ff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        className="mt-[34px] h-[54px] w-full rounded-full bg-gradient-to-b from-[#247cff] to-[#0755e8] font-serif text-[18px] font-medium uppercase tracking-[-0.03em] text-white shadow-[inset_0_1px_rgba(255,255,255,.4),0_7px_14px_rgba(25,92,230,.3)] transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
         {saved ? "Saved" : "Save"}
       </button>
