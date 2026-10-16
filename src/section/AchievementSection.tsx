@@ -9,7 +9,7 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { Award, Globe2, Rocket, Users } from "lucide-react";
+import { Code2, ExternalLink, Medal, Trophy } from "lucide-react";
 
 const scrollSpring = {
   stiffness: 90,
@@ -19,44 +19,47 @@ const scrollSpring = {
 
 const achievements = [
   {
-    year: "2019",
-    title: "First product launched",
+    title: "4th place — Stack Hack 2.0",
     description:
-      "Turned an early idea into a product and brought it to life for its first customers.",
-    Icon: Rocket,
+      "Finished 4th in the Stack Hack 2.0 Hackathon, competing with 200+ participants.",
+    Icon: Trophy,
+    actionLabel: "Show GitHub",
+    ActionIcon: Code2,
+    secondaryActionLabel: "Show certificate",
+    SecondaryActionIcon: ExternalLink,
     side: "left",
   },
   {
-    year: "2021",
-    title: "10K users reached",
-    description:
-      "Reached a community of 10,000 users through thoughtful product improvements.",
-    Icon: Users,
+    title: "Global rank 1480 — LeetCode Weekly Contest",
+    description: "Earned a global rank of 1480 in a LeetCode Weekly Contest.",
+    Icon: Medal,
+    actionLabel: "View LeetCode profile",
+    ActionIcon: ExternalLink,
+    secondaryActionLabel: undefined,
+    SecondaryActionIcon: undefined,
     side: "right",
   },
   {
-    year: "2023",
-    title: "Design excellence award",
+    title: "600+ DSA problems solved",
     description:
-      "Recognized for creating clear, considered experiences with meaningful impact.",
-    Icon: Award,
+      "Solved 600+ data structures and algorithms problems across LeetCode and GeeksforGeeks, placing in the top 3%.",
+    Icon: Code2,
+    actionLabel: "View LeetCode profile",
+    ActionIcon: ExternalLink,
+    secondaryActionLabel: undefined,
+    SecondaryActionIcon: undefined,
     side: "left",
-  },
-  {
-    year: "2025",
-    title: "Led a global team",
-    description:
-      "Brought people across time zones together to deliver ambitious work.",
-    Icon: Globe2,
-    side: "right",
   },
 ] as const;
 
 function TimelineMilestone({
-  year,
   title,
   description,
   Icon,
+  actionLabel,
+  ActionIcon,
+  secondaryActionLabel,
+  SecondaryActionIcon,
   side,
   progress,
   threshold,
@@ -76,14 +79,10 @@ function TimelineMilestone({
   const cardOpacity = useTransform(smoothAppear, [0, 0.72], [0, 1]);
   const pathLength = useTransform(smoothAppear, [0.28, 1], [0, 1]);
   const pathOpacity = useTransform(smoothAppear, [0.22, 0.7], [0.35, 1]);
-  const nodeFill = useTransform(smoothAppear, [0.55, 1], ["#475569", "#60a5fa"]);
-  const nodeGlow = useTransform(
+  const nodeFill = useTransform(
     smoothAppear,
     [0.55, 1],
-    [
-      "0 0 0 0px rgba(59,130,246,0), 0 0 0px rgba(59,130,246,0)",
-      "0 0 0 5px rgba(59,130,246,.18), 0 0 18px rgba(59,130,246,.6)",
-    ],
+    ["#475569", "#60a5fa"],
   );
   const pathStyle = prefersReducedMotion
     ? { pathLength: 1, opacity: 1 }
@@ -132,15 +131,17 @@ function TimelineMilestone({
                 boxShadow:
                   "0 0 0 5px rgba(59,130,246,.18), 0 0 18px rgba(59,130,246,.6)",
               }
-            : { backgroundColor: nodeFill, boxShadow: nodeGlow }
+            : {
+                backgroundColor: nodeFill,
+                boxShadow:
+                  "0 0 0 5px rgba(59,130,246,.18), 0 0 18px rgba(59,130,246,.6)",
+              }
         }
       />
 
       <motion.article
         style={
-          prefersReducedMotion
-            ? undefined
-            : { opacity: cardOpacity, x: cardX }
+          prefersReducedMotion ? undefined : { opacity: cardOpacity, x: cardX }
         }
         className={`relative col-start-2 flex min-h-40 items-start gap-4 rounded-2xl border border-blue-300/15 bg-[#10171d] px-5 py-5 shadow-[0_14px_40px_rgba(0,0,0,.28)] transition-colors hover:border-blue-300/35 sm:gap-5 sm:px-7 sm:py-6 md:min-h-44 ${left ? "md:col-start-1 md:row-start-1 md:flex-row-reverse md:text-right" : "md:col-start-3 md:row-start-1"}`}
       >
@@ -151,15 +152,30 @@ function TimelineMilestone({
           <Icon className="size-5 sm:size-[22px]" strokeWidth={1.8} />
         </span>
         <div className="min-w-0">
-          <p className="text-xs font-bold tracking-[0.19em] text-blue-300 sm:text-sm">
-            {year}
-          </p>
-          <h3 className="mt-1.5 text-lg font-semibold leading-snug tracking-[-0.025em] text-white sm:text-xl">
+          <h3 className="text-lg font-semibold leading-snug tracking-[-0.025em] text-white sm:text-xl">
             {title}
           </h3>
           <p className="mt-2 text-sm leading-6 text-slate-400 sm:text-[15px]">
             {description}
           </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <button
+              type="button"
+              className="inline-flex h-9 items-center gap-2 rounded-lg border border-blue-300/30 bg-blue-400/10 px-3.5 text-xs font-semibold text-blue-200 transition-colors hover:border-blue-200/60 hover:bg-blue-400/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#10171d]"
+            >
+              {actionLabel}
+              <ActionIcon aria-hidden="true" className="size-3.5" />
+            </button>
+            {secondaryActionLabel && SecondaryActionIcon ? (
+              <button
+                type="button"
+                className="inline-flex h-9 items-center gap-2 rounded-lg border border-blue-300/30 bg-blue-400/10 px-3.5 text-xs font-semibold text-blue-200 transition-colors hover:border-blue-200/60 hover:bg-blue-400/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#10171d]"
+              >
+                {secondaryActionLabel}
+                <SecondaryActionIcon aria-hidden="true" className="size-3.5" />
+              </button>
+            ) : null}
+          </div>
         </div>
       </motion.article>
       <div
@@ -225,7 +241,7 @@ export default function AchievementSection() {
           <div className="relative z-[2] space-y-7 sm:space-y-9 md:space-y-12">
             {achievements.map((achievement, index) => (
               <TimelineMilestone
-                key={achievement.year}
+                key={achievement.title}
                 {...achievement}
                 progress={scrollYProgress}
                 threshold={0.1 + (index / (achievements.length - 1)) * 0.8}

@@ -210,7 +210,12 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="dark relative z-10 -mt-10 scroll-mt-8 rounded-t-[40px] bg-[#0C0C0C] px-4 pb-10 pt-14 font-[family-name:var(--font-kanit)] text-white sm:-mt-12 sm:rounded-t-[50px] sm:px-7 sm:pt-16 md:-mt-14 md:rounded-t-[60px] md:px-10 md:pt-20"
+      className="dark relative z-10 -mt-10 scroll-mt-8 rounded-t-[40px] bg-[#080d10] px-4 pb-10 pt-14 font-[family-name:var(--font-kanit)] text-white sm:-mt-12 sm:rounded-t-[50px] sm:px-7 sm:pt-16 md:-mt-14 md:rounded-t-[60px] md:px-10 md:pt-20"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(116, 145, 151, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(116, 145, 151, 0.045) 1px, transparent 1px), radial-gradient(ellipse at 50% 45%, rgba(18, 39, 42, 0.22), transparent 70%)",
+        backgroundSize: "160px 160px, 160px 160px, auto",
+      }}
     >
       <div className="mx-auto w-full max-w-[92rem]">
         <header className="text-center">

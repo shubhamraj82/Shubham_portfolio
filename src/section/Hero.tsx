@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import Pointer from "@/components/Pointer";
 import AddProfileCard from "@/components/AddProfileCard";
 import ProfileSidebarCard from "@/components/ProfileSidebarCard";
+import TechText from "@/components/TechText";
 import {easeInOut, motion,useAnimate} from "framer-motion"
 import { useEffect } from "react";
 
@@ -100,13 +101,35 @@ export default function Hero() {
                 <p className="text-center text-lg md:text-xl text-foreground/60 mt-6">
                     Hi, I&apos;m Shubham Raj <span aria-hidden="true">👋</span>
                 </p>
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] text-center mt-4">
-                    Building Solutions,<br />
-                    Solving <span className="bg-gradient-to-r from-sky-500 to-violet-600 bg-clip-text text-transparent">Real-World</span><br />
-                    Problems.
+                <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight leading-[1.05] text-center mt-4 text-black">
+                    <span className="sr-only">Building Solutions, Solving Real-World Problems.</span>
+                    <span aria-hidden="true" className="block">
+                        <span className="block h-[1.05em]">
+                            <TechText text="BUILDING SOLUTIONS," fontWeight={700} fontSize={88} letterSpacing={-0.05}
+                                color="currentColor" accentColor="#2563eb" reveal="letter" specks={12} intro="none"
+                                guides={false} style={{ height: "100%" }} />
+                        </span>
+                        <span className="flex h-[1.05em] items-center justify-center gap-0">
+                            <span className="inline-block h-full w-[3.25em] shrink-0 align-top">
+                                <TechText text="SOLVING" fontWeight={700} fontSize={88} letterSpacing={-0.05}
+                                    color="currentColor" accentColor="#2563eb" reveal="letter" specks={12} intro="none"
+                                    guides={false} style={{ height: "100%" }} />
+                            </span>
+                            <span className="inline-block h-full w-[6.55em] shrink-0 align-top">
+                                <TechText text="REAL-WORLD" fontWeight={700} fontSize={88} letterSpacing={-0.05}
+                                    color="#2563eb" accentColor="#111827" reveal="letter" specks={12} intro="none"
+                                    guides={false} style={{ height: "100%" }} />
+                            </span>
+                        </span>
+                        <span className="block h-[1.05em]">
+                            <TechText text="PROBLEMS." fontWeight={700} fontSize={88} letterSpacing={-0.05}
+                                color="currentColor" accentColor="#2563eb" reveal="letter" specks={12} intro="none"
+                                guides={false} style={{ height: "100%" }} />
+                        </span>
+                    </span>
                 </h1>
-                <p className="text-center text-xl text-neutral-950 mt-8 max-w-2xl mx-auto">
-                    I&apos;m a full-stack developer and AI enthusiast building scalable applications and intelligent products. I love exploring new technologies, solving challenging problems, and bringing ambitious ideas to life through code.
+                <p className="text-center text-xl text-white/85 mt-8 max-w-2xl mx-auto">
+                    I&apos;m a <span className="font-semibold text-blue-400">full-stack developer and AI enthusiast</span> building scalable applications and intelligent products. I love exploring <span className="font-semibold text-blue-400">new technologies</span>, solving challenging problems, and bringing ambitious ideas to life through code.
                  </p>
                  <form className="flex border border-white/15 rounded-full p-2 mt-8 max-w-lg mx-auto">
                     <input 

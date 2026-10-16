@@ -1,0 +1,24 @@
+.portal-grid {
+  background-image: linear-gradient(rgba(96, 165, 250, 0.7) 1px, transparent 1px), linear-gradient(90deg, rgba(96, 165, 250, 0.7) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse at 72% 50%, black, transparent 72%);
+}
+
+.portal-gradient {
+  background: linear-gradient(100deg, #eff6ff 0%, #93c5fd 48%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.portal-scene { perspective: 900px; }
+.portal-orbit { transform: rotateX(68deg) rotateZ(-15deg); box-shadow: 0 0 32px rgba(59, 130, 246, 0.28), inset 0 0 22px rgba(59, 130, 246, 0.12); }
+.portal-orbit-two { transform: rotateX(68deg) rotateZ(42deg); }
+.portal-orbit-three { transform: rotateX(15deg) rotateZ(20deg); }
+.portal-sphere { box-shadow: 0 0 70px rgba(37, 99, 235, 0.32), inset 0 0 45px rgba(147, 197, 253, 0.2); }
+.portal-cracks { background: repeating-radial-gradient(circle at 37% 37%, transparent 0 13%, rgba(191, 219, 254, 0.4) 13.5% 14%, transparent 14.5% 22%); mix-blend-mode: screen; }
+.portal-planet { background: radial-gradient(circle at 32% 28%, #dbeafe 0%, #60a5fa 20%, #1e3a8a 57%, #030712 100%); box-shadow: 0 0 23px rgba(59, 130, 246, 0.45), inset -8px -8px 13px rgba(0, 0, 0, 0.48); }
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-orbit, .portal-sphere, .portal-planet { animation: none !important; }
+}

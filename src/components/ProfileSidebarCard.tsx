@@ -1,27 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import { FileDown, Plus, UserRound } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  BriefcaseBusiness,
-  FileDown,
-  Folder,
-  Mail,
-  Plus,
-  Settings,
-  UserRound,
-} from "lucide-react";
+  GithubIcon,
+  InstagramIcon,
+  Linkedin01Icon,
+  TwitterIcon,
+} from "@hugeicons/core-free-icons";
+import AnimatedList from "./AnimatedList";
 
 const menuItems = [
   { label: "About me", icon: UserRound },
-  { label: "Projects", icon: Folder },
-  { label: "Skills & tech", icon: Settings },
-  { label: "Experience", icon: BriefcaseBusiness },
-  { label: "Contact", icon: Mail },
+  { label: "GitHub", brandIcon: GithubIcon },
+  { label: "Instagram", brandIcon: InstagramIcon },
+  { label: "Twitter", brandIcon: TwitterIcon },
+  { label: "LinkedIn", brandIcon: Linkedin01Icon },
   { label: "Download resume", icon: FileDown },
 ];
 
 export default function ProfileSidebarCard() {
-  const [selectedItem, setSelectedItem] = useState("");
   const [message, setMessage] = useState("");
 
   return (
@@ -52,22 +51,55 @@ export default function ProfileSidebarCard() {
         View portfolio
       </button>
 
-      <nav aria-label="Portfolio sections" className="mt-5 space-y-1">
-        {menuItems.map(({ label, icon: Icon }) => (
-          <button
-            key={label}
-            type="button"
-            aria-pressed={selectedItem === label}
-            onClick={() => {
-              setSelectedItem(label);
-              setMessage(`${label} selected`);
-            }}
-            className={`flex min-h-[44px] w-full items-center gap-5 rounded-md border px-1 text-left text-[18px] transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${selectedItem === label ? "border-white/35 bg-white/[0.08] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_3px_0_rgba(0,0,0,0.55),0_5px_12px_rgba(0,0,0,0.3)]" : "border-transparent text-[#dedede] hover:text-white"}`}
-          >
-            <Icon aria-hidden="true" className="size-7 shrink-0 stroke-[1.8]" />
-            <span>{label}</span>
-          </button>
-        ))}
+      <nav aria-label="Portfolio sections" className="mt-5">
+        <AnimatedList
+          items={menuItems}
+          onItemSelect={(item) => {
+            setMessage(`${item.label} selected`);
+          }}
+          renderItem={(item, _index, selected) => {
+            const Icon = "icon" in item ? item.icon : null;
+            return (
+              <>
+                {item.brandIcon ? (
+                  <HugeiconsIcon
+                    icon={item.brandIcon}
+                    aria-hidden="true"
+                    className="size-6 shrink-0"
+                    size={24}
+                    strokeWidth={1.8}
+                  />
+                ) : Icon ? (
+                  <Icon
+                    aria-hidden="true"
+                    className="size-6 shrink-0 stroke-[1.8]"
+                  />
+                ) : null}
+                <span
+                  className={`text-[17px] ${selected ? "text-white" : "text-[#dedede]"}`}
+                >
+                  {item.label}
+                </span>
+              </>
+            );
+          }}
+          initialSelectedIndex={-1}
+          animation="pop"
+          animateOnce
+          stagger={0.04}
+          selectOnHover
+          enableArrowNavigation
+          theme="dark"
+          accentColor="#7dd3fc"
+          frame={false}
+          displayScrollbar={false}
+          showGradients={false}
+          gap={4}
+          radius={10}
+          width="100%"
+          maxHeight={282}
+          itemClassName="!min-h-[47px] !py-2"
+        />
       </nav>
       <p className="sr-only" aria-live="polite">
         {message}
