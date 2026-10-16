@@ -219,7 +219,7 @@ export default function Projects() {
     >
       <div className="mx-auto w-full max-w-[92rem]">
         <header className="text-center">
-          <h2 className="bg-[linear-gradient(180deg,#646973_0%,#BBCCD7_100%)] bg-clip-text text-4xl font-bold uppercase tracking-[0.12em] text-transparent sm:text-5xl md:text-6xl">
+          <h2 className="bg-[linear-gradient(180deg,#646973_0%,#BBCCD7_100%)] bg-clip-text text-5xl font-bold uppercase tracking-[0.12em] text-transparent sm:text-6xl md:text-7xl">
             Project
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-400 sm:mt-4 sm:text-base">
@@ -228,9 +228,9 @@ export default function Projects() {
         </header>
 
         <Tabs value={activeFilter} onValueChange={(value) => setActiveFilter(value as ProjectCategory)} className="mt-7 items-center sm:mt-9">
-          <TabsList aria-label="Project categories" className="h-10 rounded-full border border-white/10 bg-[#151719] p-1">
+          <TabsList aria-label="Project categories" className="h-16 rounded-full border-2 border-white/80 bg-[#090b0d] p-1.5 shadow-[0_8px_24px_rgba(0,0,0,.2)]">
             {filters.map((filter) => (
-              <TabsTrigger key={filter} value={filter} className="rounded-full px-5 text-slate-400 data-active:bg-[#D7E2EA] data-active:text-[#101214] sm:px-6">
+              <TabsTrigger key={filter} value={filter} className="min-w-[96px] rounded-full border border-transparent bg-white px-8 text-lg font-semibold text-[#111] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.04] hover:border-white hover:bg-slate-100 hover:text-black hover:shadow-[0_4px_14px_rgba(255,255,255,.2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 data-active:bg-[#dcecff] data-active:text-[#111] sm:min-w-[108px] sm:px-9">
                 {filter}
               </TabsTrigger>
             ))}

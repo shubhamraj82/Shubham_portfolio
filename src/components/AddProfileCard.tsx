@@ -1,118 +1,123 @@
 "use client";
 
-import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
-import { Image as ImageIcon, CloudUpload } from "lucide-react";
+import type { ComponentType, ReactNode } from "react";
+import { BarChart3, CalendarDays } from "lucide-react";
+import AnimatedList from "./AnimatedList";
 
-export default function AddProfileCard() {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [profileName, setProfileName] = useState("");
-  const [isKidsProfile, setIsKidsProfile] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
-  const [saved, setSaved] = useState(false);
+type EducationEntry = {
+  title: string;
+  degree?: string;
+  period: string;
+  mark?: string;
+  grade?: string;
+};
 
-  function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
+type EducationAnimatedListProps = {
+  items: EducationEntry[];
+  renderItem: (item: EducationEntry, index: number, selected: boolean) => ReactNode;
+  initialSelectedIndex?: number;
+  animation?: string;
+  animateOnce?: boolean;
+  stagger?: number;
+  selectOnHover?: boolean;
+  enableArrowNavigation?: boolean;
+  theme?: "dark";
+  accentColor?: string;
+  frame?: boolean;
+  displayScrollbar?: boolean;
+  showGradients?: boolean;
+  gap?: number;
+  radius?: number;
+  width?: number;
+  maxHeight?: number;
+  itemClassName?: string;
+  className?: string;
+};
 
-    setImageUrl(URL.createObjectURL(file));
-    setSaved(false);
-  }
+const EducationAnimatedList = AnimatedList as unknown as ComponentType<EducationAnimatedListProps>;
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSaved(true);
+const education = [
+  {
+    title: "Kalinga Institute of Industrial Technology, Bhubaneswar",
+    degree: "Bachelor of Technology · Computer Science and Communication Engineering",
+    period: "Sep 2022 – Jul 2026",
+    mark: "KIIT",
+  },
+  {
+    title: "12th Grade · Surendranath Centenary School",
+    period: "2020 – 2022",
+    grade: "83.43%",
+  },
+  {
+    title: "10th Grade · Surendranath Centenary School",
+    period: "2009 – 2020",
+    grade: "88.34%",
+  },
+];
+
+function SchoolMark({ kiit = false }: { kiit?: boolean }) {
+  if (kiit) {
+    return (
+      <div className="flex size-[72px] shrink-0 flex-col items-center justify-center text-[#00ed68]" aria-label="KIIT">
+        <span className="text-[22px] font-bold leading-none">KIIT</span>
+        <span aria-hidden="true" className="mt-1 text-[38px] leading-[30px]">◉</span>
+        <span aria-hidden="true" className="text-[14px] leading-none tracking-[2px]">✹</span>
+      </div>
+    );
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="h-[564px] w-[432px] rounded-2xl border-2 border-sky-300/70 bg-[#171717]/65 px-10 pt-9 pb-8 text-white shadow-[0_5px_0_rgba(37,99,235,0.55),0_18px_40px_rgba(2,132,199,0.28),inset_0_1px_0_rgba(255,255,255,0.28)] backdrop-blur-xl"
-    >
-      <h2 className="text-[24px] font-semibold leading-8">Add profile</h2>
+    <div className="relative flex size-[68px] shrink-0 items-center justify-center overflow-hidden rounded-md bg-[#e5e5e5]" aria-hidden="true">
+      <span className="absolute right-2 top-2 size-10 rounded-full bg-[#82a1c4]" />
+      <span className="absolute bottom-2 left-2 size-8 rounded-full bg-[#214c63]/80" />
+    </div>
+  );
+}
 
-      <div className="mt-5 flex h-[98px] items-center gap-6">
-        <button
-          type="button"
-          onClick={() => fileInputRef.current?.click()}
-          aria-label="Choose profile image"
-          className="flex size-[98px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#242424] text-white transition-colors hover:bg-[#303030] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        >
-          {imageUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={imageUrl}
-              alt="Profile preview"
-              className="size-full object-cover"
-            />
-          ) : (
-            <ImageIcon
-              aria-hidden="true"
-              className="size-7"
-              strokeWidth={1.8}
-            />
-          )}
-        </button>
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="sr-only"
-          aria-label="Upload profile image"
-        />
-        <button
-          type="button"
-          onClick={() => fileInputRef.current?.click()}
-          className="flex h-[54px] flex-1 items-center justify-center gap-2 bg-[#242424] text-[16px] text-[#dedede] transition-colors hover:bg-[#303030] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        >
-          <CloudUpload aria-hidden="true" className="size-[18px]" />
-          Upload image
-        </button>
-      </div>
+export default function AddProfileCard() {
+  return (
+    <section className="h-[564px] w-[432px] rounded-2xl border-2 border-sky-300/70 bg-[#171717]/65 px-9 pt-8 pb-6 text-white shadow-[0_5px_0_rgba(37,99,235,0.55),0_18px_40px_rgba(2,132,199,0.28),inset_0_1px_0_rgba(255,255,255,0.28)] backdrop-blur-xl">
+      <h2 className="font-serif text-[28px] font-semibold leading-9">My Education</h2>
 
-      <label className="mt-[38px] block">
-        <span className="sr-only">Profile name</span>
-        <input
-          type="text"
-          value={profileName}
-          onChange={(event) => {
-            setProfileName(event.target.value);
-            setSaved(false);
-          }}
-          placeholder="Profile name"
-          className="h-[68px] w-full border-2 border-[#454545] bg-[#222222] px-7 text-[16px] text-white outline-none transition-colors placeholder:text-[#929292] focus:border-[#a2e52d]"
-        />
-      </label>
-
-      <button
-        type="button"
-        role="switch"
-        aria-checked={isKidsProfile}
-        onClick={() => setIsKidsProfile((value) => !value)}
-        className="mt-[30px] flex items-center gap-4 text-left text-[16px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-      >
-        <span
-          className={`relative h-4 w-[50px] border-2 transition-colors ${isKidsProfile ? "border-[#a2e52d]" : "border-[#454545]"}`}
-        >
-          <span
-            className={`absolute -top-[5px] size-[26px] rounded-full transition-all ${isKidsProfile ? "left-[22px] bg-[#a2e52d]" : "left-[-3px] bg-[#555555]"}`}
-          />
-        </span>
-        Kid’s profile
-      </button>
-
-      <p className="mt-5 text-[16px] leading-[26px] text-white">
-        A profile with curated content and features,
-        <br />
-        and a simplified user interface.
-      </p>
-
-      <button
-        type="submit"
-        className="mt-[34px] h-[54px] w-full rounded-full bg-gradient-to-b from-[#247cff] to-[#0755e8] font-serif text-[18px] font-medium uppercase tracking-[-0.03em] text-white shadow-[inset_0_1px_rgba(255,255,255,.4),0_7px_14px_rgba(25,92,230,.3)] transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-      >
-        {saved ? "Saved" : "Save"}
-      </button>
-    </form>
+      <EducationAnimatedList
+        items={education}
+        renderItem={(item, index) => (
+          <div className={`flex w-full items-center gap-4 font-serif ${index === 0 ? "min-h-[132px]" : "min-h-[76px]"}`}>
+            <SchoolMark kiit={index === 0} />
+            <div className="min-w-0">
+              <h3 className="text-[16px] font-bold leading-[1.25] whitespace-normal">{item.title}</h3>
+              {item.degree && <p className="mt-1 text-[13px] leading-[1.3] text-white/85">{item.degree}</p>}
+              <p className="mt-2 flex items-center gap-2 text-[14px] leading-5 text-white/90">
+                <CalendarDays aria-hidden="true" className="size-[18px] shrink-0" />
+                {item.period}
+              </p>
+              {item.grade && (
+                <p className="mt-1 flex items-center gap-2 text-[14px] leading-5 text-white/90">
+                  <BarChart3 aria-hidden="true" className="size-[18px] shrink-0" />
+                  Grade: {item.grade}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+        initialSelectedIndex={0}
+        animation="pop"
+        animateOnce
+        stagger={0.08}
+        selectOnHover
+        enableArrowNavigation
+        theme="dark"
+        accentColor="#7dd3fc"
+        frame={false}
+        displayScrollbar={false}
+        showGradients={false}
+        gap={8}
+        radius={7}
+        width={356}
+        maxHeight={460}
+        itemClassName="!px-4 !py-3"
+        className="mt-2"
+      />
+    </section>
   );
 }

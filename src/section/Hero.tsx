@@ -1,76 +1,53 @@
 "use client"
 
-import Button from "@/components/Button";
 import AddProfileCard from "@/components/AddProfileCard";
 import ProfileSidebarCard from "@/components/ProfileSidebarCard";
 import TechText from "@/components/TechText";
-import {easeInOut, motion,useAnimate} from "framer-motion"
-import { useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export default function Hero() {
-    const [leftDesignscope,leftDesignanimate] = useAnimate();
-    const [rightDesignScope,rightDesignAnimate]=useAnimate();
-    const [rightPointerScope,rightPointerAnimate]=useAnimate();
-    
-    useEffect(()=>{
-
-        leftDesignanimate(
-            [
-            [leftDesignscope.current,{ opacity:1},{duration:0.5}],
-            [leftDesignscope.current,{y:0,x:0},{duration:0.5}]
-        ]
-    );
-        rightDesignAnimate([
-            [
-                rightDesignScope.current,
-                {opacity:1},
-                {duration:0.5,delay:1.5}
-            ],
-            [
-                rightDesignScope.current,{x:0,y:0},{duration:0.5}
-            ]
-        ]);
-        rightPointerAnimate([
-            [
-                rightPointerScope.current,{opacity:1},{duration:0.5, delay:1.5}
-            ],
-            [
-                rightPointerScope.current, {x:175,y:0},{duration:0.5}
-            ],
-            [
-                rightPointerScope.current,{x:0, y:[0,20,0]},{duration:0.5}
-            ]
-        ])
-    }, [
-        leftDesignanimate,
-        leftDesignscope,
-        rightDesignAnimate,
-        rightDesignScope,
-        rightPointerAnimate,
-        rightPointerScope,
-    ])
+    const heroRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: heroRef,
+        offset: ["start start", "end start"],
+    });
+    const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+    const heroOpacity = useTransform(scrollYProgress, [0, 0.9, 1], [1, 1, 0.82]);
+    const cardTransition = { duration: 1.1, ease: [0.16, 1, 0.3, 1] as const };
     return (
-        <section className="py-24 overflow-x-clip">
-            <div className="container relative mx-auto">
+        <motion.section
+            ref={heroRef}
+            style={{ scale: heroScale, opacity: heroOpacity }}
+            className="py-24 overflow-x-clip"
+        >
+            <div className="container relative mx-auto isolate">
                 <motion.div 
-                ref={leftDesignscope} 
                 drag
-                initial={{opacity:0, y:100,x:-100}}
-                className="absolute left-0 top-16 hidden cursor-grab active:cursor-grabbing lg:block">
+                initial={{ opacity: 0, y: 56, x: -255 }}
+                animate={{ opacity: 1, y: 0, x: -155 }}
+                transition={cardTransition}
+                className="absolute left-0 top-16 z-30 hidden cursor-grab active:cursor-grabbing lg:block">
                     <ProfileSidebarCard />
                 </motion.div>
                 <motion.div
-                ref={rightDesignScope}
-                initial={{opacity:0 , x:100,y:100}}
+                initial={{ opacity: 0, x: 56, y: 56 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ ...cardTransition, delay: 0.18 }}
                 drag
-                className="absolute -right-64 -top-16 hidden lg:block">
+                className="absolute -right-36 -top-16 z-30 hidden lg:block">
                     <AddProfileCard />
                 </motion.div>
                
                 <motion.div 
-                ref={rightPointerScope}
-                initial={{opacity:0,x:275,y:100}}
-                className="absolute right-80 -top-4 hidden lg:block">
+                initial={{ opacity: 0, x: 275, y: 100 }}
+                animate={{ opacity: 1, x: [275, 175, 175], y: [100, 0, 0] }}
+                transition={{
+                    opacity: { duration: 0.5, delay: 1.5 },
+                    x: { duration: 1, delay: 1.5, ease: [0.22, 1, 0.36, 1] },
+                    y: { duration: 1, delay: 1.5, ease: [0.22, 1, 0.36, 1] },
+                }}
+                className="absolute right-80 -top-4 z-30 hidden lg:block">
                     
                 </motion.div>
                 {/* <div className="flex justify-center">
@@ -78,55 +55,41 @@ export default function Hero() {
                     $7.5M seed round raised
                     </div>
                     </div> */}
-                <p className="text-center text-lg md:text-xl text-foreground/60 mt-6">
+                <p className="relative z-0 mt-6 text-center font-serif text-lg text-white/75 md:text-xl">
                     Hi, I&apos;m Shubham Raj <span aria-hidden="true">👋</span>
                 </p>
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight leading-[1.05] text-center mt-4 text-black">
-                    <span className="sr-only">Building Solutions, Solving Real-World Problems.</span>
-                    <span aria-hidden="true" className="block">
-                        <span className="block h-[1.05em]">
-                            <TechText text="BUILDING SOLUTIONS," fontWeight={700} fontSize={96} letterSpacing={-0.05}
-                                color="currentColor" accentColor="#2563eb" reveal="letter" specks={12} intro="none"
+                <h1 className="relative z-0 mx-auto mt-5 max-w-[900px] text-center font-serif text-5xl font-bold leading-[1.05] tracking-[-0.045em] text-white sm:text-6xl md:text-7xl lg:text-[76px]">
+                    <span className="sr-only">I build software that solves real-world problems.</span>
+                    <span aria-hidden="true" className="block h-[1.08em]">
+                        <TechText text="I build software that solves" fontFamily="Georgia, 'Times New Roman', serif" fontWeight={700} fontSize={76} letterSpacing={-0.045}
+                            color="currentColor" accentColor="#2563eb" reveal="letter" specks={12} intro="none"
+                            guides={false} style={{ height: "100%" }} />
+                    </span>
+                    <span aria-hidden="true" className="flex h-[1.08em] items-center justify-center gap-[0.2em]">
+                        <span className="inline-block h-full w-[5.4em] shrink-0 align-top">
+                            <TechText text="real-world" fontFamily="Georgia, 'Times New Roman', serif" fontWeight={700} fontSize={76} letterSpacing={-0.045}
+                                color="#2563eb" accentColor="#111827" reveal="letter" specks={12} intro="none"
                                 guides={false} style={{ height: "100%" }} />
                         </span>
-                        <span className="flex h-[1.05em] items-center justify-center gap-0">
-                            <span className="inline-block h-full w-[3.01em] shrink-0 align-top">
-                                <TechText text="SOLVING" fontWeight={700} fontSize={96} letterSpacing={-0.05}
-                                    color="currentColor" accentColor="#2563eb" reveal="letter" specks={12} intro="none"
-                                    guides={false} style={{ height: "100%" }} />
-                            </span>
-                            <span className="inline-block h-full w-[6.25em] shrink-0 align-top">
-                                <TechText text="REAL-WORLD" fontWeight={700} fontSize={96} letterSpacing={-0.05}
-                                    color="#2563eb" accentColor="#111827" reveal="letter" specks={12} intro="none"
-                                    guides={false} style={{ height: "100%" }} />
-                            </span>
-                        </span>
-                        <span className="block h-[1.05em]">
-                            <TechText text="PROBLEMS." fontWeight={700} fontSize={96} letterSpacing={-0.05}
+                        <span className="inline-block h-full w-[4.55em] shrink-0 align-top">
+                            <TechText text="problems." fontFamily="Georgia, 'Times New Roman', serif" fontWeight={700} fontSize={76} letterSpacing={-0.045}
                                 color="currentColor" accentColor="#2563eb" reveal="letter" specks={12} intro="none"
                                 guides={false} style={{ height: "100%" }} />
                         </span>
                     </span>
                 </h1>
-                <p className="text-center text-xl text-white/85 mt-8 max-w-2xl mx-auto">
-                    I&apos;m a <span className="font-semibold text-blue-400">full-stack developer and AI enthusiast</span> building scalable applications and intelligent products. I love exploring <span className="font-semibold text-blue-400">new technologies</span>, solving challenging problems, and bringing ambitious ideas to life through code.
+                <p className="relative z-0 mx-auto mt-7 max-w-[620px] text-center font-serif text-lg leading-relaxed text-white/80 sm:text-xl md:text-[22px]">
+                    Full-stack developer building scalable applications and intelligent products.
                  </p>
-                 <form className="flex border border-white/15 rounded-full p-2 mt-8 max-w-lg mx-auto">
-                    <input 
-                    type="email" 
-                    placeholder="Enter your email here...." 
-                    className="bg-transparent px-4 md:flex-1 w-full"
-                    />
-                    <Button 
-                    type="submit" 
-                    variant="primary"
-                    size="sm"
-                    className="whitespace-nowrap"
-                    >
-                        Sign Up
-                        </Button>
-                 </form>
+                 <div className="relative z-0 mt-8 flex flex-wrap justify-center gap-4">
+                    <a href="#projects" className="inline-flex h-[58px] min-w-[220px] items-center justify-center gap-3 rounded-full bg-gradient-to-b from-[#247cff] to-[#0755e8] px-8 font-serif text-lg font-medium text-white shadow-[inset_0_1px_rgba(255,255,255,.4),0_7px_14px_rgba(25,92,230,.3)] transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                        View my projects <span aria-hidden="true">→</span>
+                    </a>
+                    <a href="#contact" className="inline-flex h-[58px] min-w-[180px] items-center justify-center rounded-full border border-sky-400/80 px-8 font-serif text-lg text-white transition hover:bg-sky-400/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                        Contact me
+                    </a>
+                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }
