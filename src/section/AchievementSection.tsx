@@ -8,7 +8,7 @@ import {
   useSpring,
   useTransform,
   type MotionValue,
-} from "framer-motion";
+} from "motion/react";
 import { Code2, ExternalLink, Medal, Trophy } from "lucide-react";
 
 const scrollSpring = {

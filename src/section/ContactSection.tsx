@@ -1,10 +1,11 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import {
   ArrowRight,
   BriefcaseBusiness as Linkedin,
+  ChevronDown,
   Code2 as Github,
   Mail,
   MessageSquare,
@@ -53,6 +54,7 @@ export default function ContactSection() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
+  const [expandedSocial, setExpandedSocial] = useState<string | null>(null);
   const reduceMotion = useReducedMotion();
   const sceneRef = useRef<HTMLDivElement>(null);
   const sceneIsVisible = useInView(sceneRef, { amount: 0.15 });
@@ -130,34 +132,72 @@ export default function ContactSection() {
           <div className="mt-8 max-w-md">
             {socials.map((social, index) => {
               const Icon = social.icon;
+              const isExpanded = expandedSocial === social.label;
+              const panelId = `contact-${social.label.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-")}`;
               return (
-                <motion.a
+                <motion.div
                   key={social.label}
-                  href={social.href}
-                  target={social.label === "Email" ? undefined : "_blank"}
-                  rel="noreferrer"
                   initial={{ opacity: 0, x: reduceMotion ? 0 : -15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + index * 0.12 }}
-                  whileHover={reduceMotion ? undefined : { x: 5 }}
-                  className="group flex items-center gap-4 border-b border-white/[0.09] py-4 first:pt-2"
+                  className="border-b border-white/[0.09] first:pt-2"
                 >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-blue-400/30 bg-blue-400/[0.05] text-blue-300 transition-colors group-hover:bg-blue-400/15">
-                    <Icon size={21} />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-xs text-zinc-500">
-                      {social.label}
+                  <button
+                    type="button"
+                    aria-expanded={isExpanded}
+                    aria-controls={panelId}
+                    onClick={() => setExpandedSocial(isExpanded ? null : social.label)}
+                    className="group flex w-full items-center gap-4 py-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-4 focus-visible:ring-offset-[#0C0C0C]"
+                  >
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-blue-400/30 bg-blue-400/[0.05] text-blue-300 transition-colors group-hover:bg-blue-400/15">
+                      <Icon size={21} />
                     </span>
-                    <span className="mt-1 block truncate text-sm text-zinc-200 transition-colors group-hover:text-blue-200 sm:text-base">
-                      {social.value}
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-xs text-zinc-500">
+                        {social.label}
+                      </span>
+                      <span className="mt-1 block truncate text-sm text-zinc-200 transition-colors group-hover:text-blue-200 sm:text-base">
+                        {social.value}
+                      </span>
                     </span>
-                  </span>
-                  <ArrowRight
-                    size={18}
-                    className="text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-blue-300"
-                  />
-                </motion.a>
+                    <motion.span
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.22 }}
+                      className="text-zinc-500 transition-colors group-hover:text-blue-300"
+                    >
+                      <ChevronDown size={18} />
+                    </motion.span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isExpanded && (
+                      <motion.div
+                        key="details"
+                        id={panelId}
+                        role="region"
+                        aria-label={`${social.label} contact details`}
+                        initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                        transition={{ duration: reduceMotion ? 0 : 0.24, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="flex items-center justify-between gap-4 pb-4 pl-16">
+                          <p className="text-xs leading-relaxed text-zinc-400 sm:text-sm">
+                            {social.label === "Email" ? "Have a project or question? Send me a note." : `Find me on ${social.label}.`}
+                          </p>
+                          <a
+                            href={social.href}
+                            target={social.label === "Email" ? undefined : "_blank"}
+                            rel={social.label === "Email" ? undefined : "noreferrer"}
+                            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-blue-300/25 bg-blue-300/[0.07] px-3 py-2 text-xs font-medium text-blue-200 transition hover:border-blue-300/50 hover:bg-blue-300/[0.13] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+                          >
+                            Open <ArrowRight size={13} />
+                          </a>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               );
             })}
           </div>

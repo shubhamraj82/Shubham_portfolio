@@ -3,7 +3,7 @@
 import AddProfileCard from "@/components/AddProfileCard";
 import ProfileSidebarCard from "@/components/ProfileSidebarCard";
 import TechText from "@/components/TechText";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 
 export default function Hero() {
@@ -19,9 +19,9 @@ export default function Hero() {
         <motion.section
             ref={heroRef}
             style={{ scale: heroScale, opacity: heroOpacity }}
-            className="py-24 overflow-x-clip"
+            className="relative isolate overflow-x-clip py-24"
         >
-            <div className="container relative mx-auto isolate">
+            <div className="container relative z-10 mx-auto">
                 <motion.div 
                 drag
                 initial={{ opacity: 0, y: 56, x: -255 }}

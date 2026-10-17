@@ -1,6 +1,6 @@
 "use client"
 
-import { AnimatePresence,motion } from "framer-motion"
+import { AnimatePresence, motion } from "motion/react"
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { Layers } from "lucide-react";
@@ -43,14 +43,14 @@ export default function Navbar() {
     return (
         <>
         <section
-            className="fixed top-0 z-50 w-full px-4 py-5 transition-all duration-300 sm:px-6 lg:py-7"
+            className="fixed left-0 top-0 z-50 w-[calc(100%-76px)] px-4 py-5 transition-all duration-300 sm:w-[calc(100%-180px)] sm:px-6 lg:py-7"
         >
             <div className="mx-auto max-w-[1240px]">
                 <div className={twMerge(
                     "overflow-hidden rounded-[28px] border text-[#111111] backdrop-blur-xl transition-all duration-300 md:rounded-full",
                     isScrolled
-                        ? "border-white/15 bg-[#080d10]/40 text-white shadow-[0_16px_40px_rgba(0,0,0,0.25)]"
-                        : "border-white/70 bg-white/60 shadow-[0_12px_35px_rgba(15,23,42,0.14)]",
+                        ? "border-sky-300/25 bg-[#080d10] text-white shadow-[0_16px_40px_rgba(0,0,0,0.25)]"
+                        : "border-sky-400/35 bg-[#080d10] text-white shadow-[0_12px_35px_rgba(15,23,42,0.14)]",
                 )}>
                 <div className="grid grid-cols-[1fr_auto] items-center gap-x-4 px-5 py-3 sm:px-7 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-x-5 lg:px-6 lg:py-3.5 xl:gap-x-8 xl:px-8">
                     <a href="#" className={twMerge(`flex w-fit items-center gap-2.5 font-serif text-[21px] font-bold tracking-[-0.04em] sm:text-[24px] ${glassHover}`, glassSurface)}>

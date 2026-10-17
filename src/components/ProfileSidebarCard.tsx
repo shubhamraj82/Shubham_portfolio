@@ -54,7 +54,7 @@ export default function ProfileSidebarCard() {
   const [message, setMessage] = useState("");
 
   return (
-    <aside className="h-[564px] w-[432px] cursor-auto rounded-2xl border-2 border-sky-300/70 bg-[#171717]/65 px-7 pt-8 pb-12 text-[#f4f4f5] shadow-[0_5px_0_rgba(37,99,235,0.55),0_18px_40px_rgba(2,132,199,0.28),inset_0_1px_0_rgba(255,255,255,0.28)] backdrop-blur-xl [&_button]:cursor-pointer">
+    <aside className="h-[564px] w-[432px] cursor-auto rounded-none border-2 border-sky-300/70 bg-[#171717]/65 px-7 pt-8 pb-12 text-[#f4f4f5] shadow-[0_5px_0_rgba(37,99,235,0.55),0_18px_40px_rgba(2,132,199,0.28),inset_0_1px_0_rgba(255,255,255,0.28)] backdrop-blur-xl [&_button]:cursor-pointer">
       <button
         type="button"
         onClick={() => setMessage("Shubham Raj profile selected")}

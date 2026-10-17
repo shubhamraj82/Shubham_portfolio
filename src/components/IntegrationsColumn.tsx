@@ -3,7 +3,7 @@
 import { type IntegrationsType } from "@/section/Skill"
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
-import {motion} from "framer-motion"
+import {motion} from "motion/react"
 import {Fragment } from "react"
 
 export default function IntegrationColumn(props:{

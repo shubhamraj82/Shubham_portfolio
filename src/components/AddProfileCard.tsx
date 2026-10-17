@@ -76,7 +76,7 @@ function SchoolMark({ kiit = false }: { kiit?: boolean }) {
 
 export default function AddProfileCard() {
   return (
-    <section className="h-[564px] w-[432px] rounded-2xl border-2 border-sky-300/70 bg-[#171717]/65 px-9 pt-8 pb-6 text-white shadow-[0_5px_0_rgba(37,99,235,0.55),0_18px_40px_rgba(2,132,199,0.28),inset_0_1px_0_rgba(255,255,255,0.28)] backdrop-blur-xl">
+    <section className="h-[564px] w-[432px] rounded-none border-2 border-sky-300/70 bg-[#171717]/65 px-9 pt-8 pb-6 text-white shadow-[0_5px_0_rgba(37,99,235,0.55),0_18px_40px_rgba(2,132,199,0.28),inset_0_1px_0_rgba(255,255,255,0.28)] backdrop-blur-xl">
       <h2 className="font-serif text-[28px] font-semibold leading-9">My Education</h2>
 
       <EducationAnimatedList

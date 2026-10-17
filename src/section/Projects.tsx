@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import {
   ArrowUpRight,
   Code2,
@@ -9,10 +9,11 @@ import {
 } from "lucide-react";
 import {
   motion,
+  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
-} from "framer-motion";
+} from "motion/react";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -205,6 +206,8 @@ function ProjectStack({ items }: { items: Project[] }) {
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("Web");
+  const activePillId = useId();
+  const reduceMotion = useReducedMotion();
   const visibleProjects = projects.filter((project) => project.category === activeFilter);
 
   return (
@@ -228,10 +231,23 @@ export default function Projects() {
         </header>
 
         <Tabs value={activeFilter} onValueChange={(value) => setActiveFilter(value as ProjectCategory)} className="mt-7 items-center sm:mt-9">
-          <TabsList aria-label="Project categories" className="h-16 rounded-full border-2 border-white/80 bg-[#090b0d] p-1.5 shadow-[0_8px_24px_rgba(0,0,0,.2)]">
+          <TabsList aria-label="Project categories" className="h-14 rounded-full border border-white/15 bg-[#11171a]/85 p-1.5 shadow-[0_12px_36px_rgba(0,0,0,.32)] backdrop-blur-xl sm:h-16">
             {filters.map((filter) => (
-              <TabsTrigger key={filter} value={filter} className="min-w-[96px] rounded-full border border-transparent bg-white px-8 text-lg font-semibold text-[#111] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.04] hover:border-white hover:bg-slate-100 hover:text-black hover:shadow-[0_4px_14px_rgba(255,255,255,.2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 data-active:bg-[#dcecff] data-active:text-[#111] sm:min-w-[108px] sm:px-9">
-                {filter}
+              <TabsTrigger key={filter} value={filter} className="relative isolate min-w-[88px] rounded-full border-0 bg-transparent px-6 text-sm font-semibold text-slate-400 transition-colors hover:bg-white/[0.07] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 data-active:bg-transparent data-active:text-[#10171c] sm:min-w-[108px] sm:px-9 sm:text-base">
+                {activeFilter === filter && (
+                  <motion.span
+                    aria-hidden="true"
+                    layoutId={reduceMotion ? undefined : `${activePillId}-selected-filter`}
+                    transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 420, damping: 34 }}
+                    className="absolute inset-0 -z-10 rounded-full border border-white/70 bg-[linear-gradient(180deg,#f5faff_0%,#cfe4f5_100%)] shadow-[0_4px_16px_rgba(160,205,240,.2),inset_0_1px_rgba(255,255,255,.9)]"
+                  />
+                )}
+                <span
+                  className="relative z-10"
+                  style={{ color: activeFilter === filter ? "#10171c" : "#d1d5db" }}
+                >
+                  {filter}
+                </span>
               </TabsTrigger>
             ))}
           </TabsList>

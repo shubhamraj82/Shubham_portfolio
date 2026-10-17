@@ -1,28 +1,42 @@
 import Hero from "@/section/Hero";
+import FlowingCursor from "@/components/FlowingCursor";
 import Projects from "../section/Projects";
 import Navbar from "../section/navbar";
 import Skill from "@/section/Skill";
 import AchievementSection from "@/section/AchievementSection";
 import ContactSection from "@/section/ContactSection";
+import EyeFollowButton from "@/components/EyeFollowButton";
 
 export default function Home() {
   return (
     <>
-      <main
-        className="min-h-screen bg-[#080d10]/90 bg-[length:160px_160px,160px_160px,auto] bg-repeat"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(116, 145, 151, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(116, 145, 151, 0.045) 1px, transparent 1px), radial-gradient(ellipse at 50% 45%, rgba(18, 39, 42, 0.22), transparent 70%)",
-          backgroundSize: "160px 160px, 160px 160px, auto",
-        }}
-      >
+      <div className="relative z-50 bg-[#080d10]">
         <Navbar />
-        <Hero />
+      </div>
+      <main className="relative isolate min-h-screen overflow-hidden bg-[#080d10]">
+        <FlowingCursor
+          className="pointer-events-none absolute inset-0 z-0 opacity-100"
+          backgroundColor="#080d10"
+          simResolution={128}
+          dyeResolution={512}
+          densityDissipation={1.2}
+          velocityDissipation={0.3}
+          pressure={0.8}
+          curl={25}
+          splatRadius={0.25}
+          splatForce={6000}
+          colorUpdateSpeed={8}
+          shading
+        />
+        <div className="relative z-10">
+          <Hero />
+        </div>
       </main>
       <Projects />
       <Skill/>
       <AchievementSection/>
       <ContactSection/>
+      <EyeFollowButton />
     </>
   );
 }
