@@ -21,7 +21,7 @@ export default function IntegrationColumn(props:{
             y: reverse? 0:"-50%",
         }}
         transition={{
-            duration:15,
+            duration:30,
             repeat:Infinity,
             ease:"linear",
         }}
@@ -32,8 +32,8 @@ export default function IntegrationColumn(props:{
                      {integrations.map((integration)=>(
             <div 
             key={integration.name} 
-            className="group relative overflow-hidden rounded-2xl bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.12),transparent_72%)] bg-slate-950/55 p-4 shadow-[0_12px_36px_rgba(0,0,0,0.12)] backdrop-blur-2xl transition-colors duration-300 sm:p-5">
-                <div className="mx-auto flex size-14 items-center justify-center rounded-xl border border-slate-200/70 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.2)] sm:size-16">
+            className="group relative overflow-hidden rounded-2xl border border-[#28321E] bg-[radial-gradient(ellipse_at_top,rgba(183,255,60,0.06),transparent_72%)] bg-[#121612] p-4 shadow-[0_12px_36px_rgba(0,0,0,0.12)] backdrop-blur-2xl transition-colors duration-300 sm:p-5">
+                <div className="mx-auto flex size-14 items-center justify-center rounded-xl border border-[#28321E] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.2)] sm:size-16">
                     <Image
                     src={integration.icon}
                     alt={`${integration.name} icon`}
@@ -42,10 +42,10 @@ export default function IntegrationColumn(props:{
                     className="size-10 object-contain sm:size-11"
                     />
                 </div>
-                <h3 className="mt-4 text-center text-lg font-medium tracking-tight text-white sm:text-xl">
+                <h3 className="mt-4 text-center text-lg font-medium tracking-tight text-[#F5F7F2] sm:text-xl">
                     {integration.name}
                     </h3>
-                <p className="mt-2 text-center text-xs leading-5 text-slate-400 sm:text-sm sm:leading-6">
+                <p className="mt-2 text-center text-xs leading-5 text-[#A6ADA3] sm:text-sm sm:leading-6">
                     {integration.description}
                     </p>
             </div>

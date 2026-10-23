@@ -54,19 +54,19 @@ export default function ProfileSidebarCard() {
   const [message, setMessage] = useState("");
 
   return (
-    <aside className="h-[564px] w-[432px] cursor-auto rounded-none border-2 border-sky-300/70 bg-[#171717]/65 px-7 pt-8 pb-12 text-[#f4f4f5] shadow-[0_5px_0_rgba(37,99,235,0.55),0_18px_40px_rgba(2,132,199,0.28),inset_0_1px_0_rgba(255,255,255,0.28)] backdrop-blur-xl [&_button]:cursor-pointer">
+    <aside className="h-[564px] w-[432px] cursor-auto rounded-none border border-[#28321E] bg-[#121612] px-7 pt-8 pb-12 text-[#F5F7F2] shadow-[0_12px_32px_rgba(0,0,0,0.32),0_0_24px_rgba(183,255,60,0.08)] [&_button]:cursor-pointer">
       <button
         type="button"
         onClick={() => setMessage("Shubham Raj profile selected")}
         className="flex w-full items-center gap-4 text-left rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         aria-label="Select Shubham Raj profile"
       >
-        <span className="flex size-[64px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-slate-400 via-slate-600 to-slate-800 text-xl font-semibold text-white ring-2 ring-white/10">
+        <span className="flex size-[64px] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#28321E] to-[#121612] text-xl font-semibold text-[#F5F7F2] ring-2 ring-[#28321E]">
           SR
         </span>
         <span className="flex flex-col">
           <span className="text-[21px] leading-7">Shubham Raj</span>
-          <span className="text-[16px] leading-6 text-[#9296a2]">
+          <span className="text-[16px] leading-6 text-[#A6ADA3]">
             @shubhamraj82
           </span>
         </span>
@@ -75,7 +75,7 @@ export default function ProfileSidebarCard() {
       <button
         type="button"
         onClick={() => setMessage("Portfolio selected")}
-        className="mt-7 flex h-[64px] w-full items-center justify-center gap-3 rounded-full bg-gradient-to-b from-[#247cff] to-[#0755e8] font-serif text-[20px] font-medium uppercase tracking-[-0.03em] text-white shadow-[inset_0_1px_rgba(255,255,255,.4),0_7px_14px_rgba(25,92,230,.3)] transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        className="mt-7 flex h-[64px] w-full items-center justify-center gap-3 rounded-full bg-[#B7FF3C] font-serif text-[20px] font-medium uppercase tracking-[-0.03em] text-[#080A08] shadow-[0_4px_16px_rgba(183,255,60,0.16)] transition hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B7FF3C]"
       >
         <Plus aria-hidden="true" className="size-6 " />
         View portfolio
@@ -106,7 +106,7 @@ export default function ProfileSidebarCard() {
                   />
                 ) : null}
                 <span
-                  className={`text-[17px] ${selected ? "text-white" : "text-[#dedede]"}`}
+                  className={`text-[17px] ${selected ? "text-[#F5F7F2]" : "text-[#A6ADA3]"}`}
                 >
                   {item.label}
                 </span>
@@ -120,7 +120,7 @@ export default function ProfileSidebarCard() {
           selectOnHover
           enableArrowNavigation
           theme="dark"
-          accentColor="#7dd3fc"
+          accentColor="#B7FF3C"
           frame={false}
           displayScrollbar={false}
           showGradients={false}

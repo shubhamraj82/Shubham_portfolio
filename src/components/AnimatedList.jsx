@@ -22,26 +22,26 @@ const useIsomorphicLayoutEffect =
 
 const THEMES = {
   dark: {
-    "--al-frame": "rgba(23, 23, 23, 0.72)",
-    "--al-frame-edge": "rgba(255,255,255,.1)",
-    "--al-tile": "linear-gradient(180deg,#302e36 0%,#211f26 100%)",
-    "--al-tile-edge": "rgba(255,255,255,.08)",
-    "--al-ink": "#f4f4f5",
-    "--al-muted": "rgba(244,244,245,.58)",
+    "--al-frame": "rgba(18, 22, 18, 0.88)",
+    "--al-frame-edge": "rgba(40,50,30,.9)",
+    "--al-tile": "linear-gradient(180deg,#121612 0%,#121612 100%)",
+    "--al-tile-edge": "rgba(40,50,30,.85)",
+    "--al-ink": "#F5F7F2",
+    "--al-muted": "#A6ADA3",
     "--al-thumb": "rgba(255,255,255,.2)",
-    "--al-ring": "rgba(147,197,253,.82)",
-    "--al-ring-fill": "rgba(59,130,246,.12)",
+    "--al-ring": "rgba(183,255,60,.82)",
+    "--al-ring-fill": "rgba(183,255,60,.12)",
   },
   light: {
     "--al-frame": "rgba(245,245,245,.82)",
     "--al-frame-edge": "rgba(24,24,27,.1)",
-    "--al-tile": "linear-gradient(180deg,#fff 0%,#f4f4f5 100%)",
+    "--al-tile": "linear-gradient(180deg,#fff 0%,#F5F7F2 100%)",
     "--al-tile-edge": "rgba(24,24,27,.08)",
     "--al-ink": "#27272a",
     "--al-muted": "rgba(39,39,42,.58)",
     "--al-thumb": "rgba(24,24,27,.2)",
-    "--al-ring": "rgba(37,99,235,.72)",
-    "--al-ring-fill": "rgba(37,99,235,.08)",
+    "--al-ring": "rgba(183,255,60,.72)",
+    "--al-ring-fill": "rgba(183,255,60,.08)",
   },
 };
 

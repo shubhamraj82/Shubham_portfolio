@@ -1,6 +1,7 @@
 "use client";
 
 import type { ComponentType, ReactNode } from "react";
+import Image from "next/image";
 import { BarChart3, CalendarDays } from "lucide-react";
 import AnimatedList from "./AnimatedList";
 
@@ -58,25 +59,27 @@ const education = [
 function SchoolMark({ kiit = false }: { kiit?: boolean }) {
   if (kiit) {
     return (
-      <div className="flex size-[72px] shrink-0 flex-col items-center justify-center text-[#00ed68]" aria-label="KIIT">
-        <span className="text-[22px] font-bold leading-none">KIIT</span>
-        <span aria-hidden="true" className="mt-1 text-[38px] leading-[30px]">◉</span>
-        <span aria-hidden="true" className="text-[14px] leading-none tracking-[2px]">✹</span>
-      </div>
+      <Image
+        src="/images/kiit-logo.png"
+        alt="KIIT logo"
+        width={98}
+        height={74}
+        className="h-auto w-[98px] shrink-0 object-contain"
+      />
     );
   }
 
   return (
-    <div className="relative flex size-[68px] shrink-0 items-center justify-center overflow-hidden rounded-md bg-[#e5e5e5]" aria-hidden="true">
-      <span className="absolute right-2 top-2 size-10 rounded-full bg-[#82a1c4]" />
-      <span className="absolute bottom-2 left-2 size-8 rounded-full bg-[#214c63]/80" />
+    <div className="relative flex size-[68px] shrink-0 items-center justify-center overflow-hidden rounded-md border border-white/20 bg-[#090A09]" aria-hidden="true">
+      <span className="absolute right-2 top-2 size-10 rounded-full bg-white/80" />
+      <span className="absolute bottom-2 left-2 size-8 rounded-full bg-[#303330]" />
     </div>
   );
 }
 
 export default function AddProfileCard() {
   return (
-    <section className="h-[564px] w-[432px] rounded-none border-2 border-sky-300/70 bg-[#171717]/65 px-9 pt-8 pb-6 text-white shadow-[0_5px_0_rgba(37,99,235,0.55),0_18px_40px_rgba(2,132,199,0.28),inset_0_1px_0_rgba(255,255,255,0.28)] backdrop-blur-xl">
+    <section className="h-[564px] w-[432px] rounded-none border border-[#28321E] bg-[#121612] px-9 pt-8 pb-6 text-[#F5F7F2] shadow-[0_12px_32px_rgba(0,0,0,0.32),0_0_24px_rgba(183,255,60,0.08)]">
       <h2 className="font-serif text-[28px] font-semibold leading-9">My Education</h2>
 
       <EducationAnimatedList
@@ -86,13 +89,13 @@ export default function AddProfileCard() {
             <SchoolMark kiit={index === 0} />
             <div className="min-w-0">
               <h3 className="text-[16px] font-bold leading-[1.25] whitespace-normal">{item.title}</h3>
-              {item.degree && <p className="mt-1 text-[13px] leading-[1.3] text-white/85">{item.degree}</p>}
-              <p className="mt-2 flex items-center gap-2 text-[14px] leading-5 text-white/90">
+              {item.degree && <p className="mt-1 text-[13px] leading-[1.3] text-[#A6ADA3]">{item.degree}</p>}
+              <p className="mt-2 flex items-center gap-2 text-[14px] leading-5 text-[#A6ADA3]">
                 <CalendarDays aria-hidden="true" className="size-[18px] shrink-0" />
                 {item.period}
               </p>
               {item.grade && (
-                <p className="mt-1 flex items-center gap-2 text-[14px] leading-5 text-white/90">
+                <p className="mt-1 flex items-center gap-2 text-[14px] leading-5 text-[#A6ADA3]">
                   <BarChart3 aria-hidden="true" className="size-[18px] shrink-0" />
                   Grade: {item.grade}
                 </p>
@@ -107,7 +110,7 @@ export default function AddProfileCard() {
         selectOnHover
         enableArrowNavigation
         theme="dark"
-        accentColor="#7dd3fc"
+        accentColor="#F5F7F2"
         frame={false}
         displayScrollbar={false}
         showGradients={false}

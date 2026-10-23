@@ -32,7 +32,7 @@ export default function TechText({
   text = 'React Bits', fontFamily = '', fontWeight = 600, fontSize = 150, letterSpacing = -0.05,
   color = 'currentColor', accentColor = 'currentColor', align = 'center', reach = 200, softness = 0.7,
   dashLength = 4, dashGap = 2, strokeWidth = 1.5, lineStyle = 'dashed', reveal = 'letter', specks = 15,
-  selection = true, labels = true, draggable = true, bounce = 0.4, sweep = true, speed = 1,
+  selection = true, labels = true, draggable = true, bounce = 0.4, sweep = true, speed = 1, gradient = false,
   clickKick = true, intro = 'none', introDuration = 2, guides = false, className = '', style
 }) {
   const containerRef = useRef(null);
@@ -44,7 +44,7 @@ export default function TechText({
     settingsRef.current = {
       text, fontFamily, fontWeight, fontSize, letterSpacing, color, accentColor, align, reach, softness,
       dashLength, dashGap, strokeWidth, lineStyle, reveal, specks, selection, labels, draggable, bounce,
-      sweep, speed, clickKick, intro, introDuration, guides
+      sweep, speed, gradient, clickKick, intro, introDuration, guides
     };
     wakeRef.current();
   });
@@ -117,8 +117,8 @@ export default function TechText({
       const probe = scratchCtx;
       setFont(probe, s, s.fontSize);
       let m = probe.measureText(s.text);
-      const fit = Math.min(1, (width * 0.9) / Math.max(m.actualBoundingBoxLeft + m.actualBoundingBoxRight, 1),
-        (height * 0.66) / Math.max(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent, 1));
+      const fit = Math.min(1, (width * 0.98) / Math.max(m.actualBoundingBoxLeft + m.actualBoundingBoxRight, 1),
+        (height * 0.78) / Math.max(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent, 1));
       const size = s.fontSize * fit;
       setFont(probe, s, size); m = probe.measureText(s.text);
       const inkWidth = m.actualBoundingBoxLeft + m.actualBoundingBoxRight;
@@ -384,6 +384,18 @@ export default function TechText({
         if (glyph.outline > 0.001) { ctx.globalAlpha = glyph.outline * glyph.shown; blit(ctx, glyph.dashes, glyph.offset.x, glyph.offset.y, 0, 0); }
         ctx.globalAlpha = 1;
       });
+      if (s.gradient) {
+        ctx.globalCompositeOperation = 'source-in';
+        ctx.globalAlpha = 1;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const textGradient = ctx.createLinearGradient(0, height, width, 0);
+        textGradient.addColorStop(0, '#F5F7F2');
+        textGradient.addColorStop(0.48, '#B7FF3C');
+        textGradient.addColorStop(1, '#B7FF3C');
+        ctx.fillStyle = textGradient;
+        ctx.fillRect(0, 0, width, height);
+        ctx.globalCompositeOperation = 'source-over';
+      }
       if (presence > 0.001) drawReveal(s); drawFrame(s, accent);
       const settling = moving || introducing || kicks.length > 0 || (guideAlpha > 0.005 && guideAlpha < 0.995) ||
         Math.abs(presence - (s.reveal === 'area' && active && dragging < 0 ? 1 : 0)) > 0.002 || (frame.alpha > 0.01 && frame.alpha < 0.99);

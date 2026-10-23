@@ -17,13 +17,13 @@ export default function Pointer(props:{
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className= "feather feather-mouse-pointer text-white size-5"
+          className= "feather feather-mouse-pointer text-[#F5F7F2] size-5"
         >
           <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
           <path d="M13 13l6 6" />
         </svg>
         <div className="absolute top-full left-full">
-            <div className={twMerge("inline-flex rounded-full font-bold text-sm bg-blue-500 px-2 rounded-tl-none", color==="red" && "bg-red-500")}>
+            <div className={twMerge("inline-flex rounded-full font-bold text-sm bg-[#B7FF3C] px-2 rounded-tl-none", color==="red" && "bg-[#B7FF3C]")}>
                 {name}
             </div>
         </div>
