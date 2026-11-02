@@ -2,6 +2,7 @@ import Hero from "@/section/Hero";
 import Projects from "../section/Projects";
 import Navbar from "../section/navbar";
 import Skill from "@/section/Skill";
+import Experience from "@/section/Experience";
 import AchievementSection from "@/section/AchievementSection";
 import ContactSection from "@/section/ContactSection";
 import EyeFollowButton from "@/components/EyeFollowButton";
@@ -18,6 +19,7 @@ export default function Home() {
         </div>
       </main>
       <Projects />
+      <Experience />
       <Skill/>
       <AchievementSection/>
       <ContactSection/>

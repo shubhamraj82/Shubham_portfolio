@@ -127,3 +127,24 @@
     @apply font-sans;
   }
 }
+
+@keyframes experience-timeline-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+
+.experience-timeline-sweep {
+  animation: experience-timeline-sweep 4.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-timeline-sweep {
+    animation: none;
+    opacity: 0.45;
+    transform: translateX(150%);
+  }
+}
