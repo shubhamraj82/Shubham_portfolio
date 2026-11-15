@@ -48,10 +48,10 @@ export default function Navbar() {
         >
             <div className="mx-auto max-w-[1240px]">
                 <div className={twMerge(
-                    "overflow-hidden rounded-[28px] border border-[#28321E] text-[#F5F7F2] backdrop-blur-xl transition-all duration-300 md:rounded-full",
+                    "overflow-hidden rounded-[28px] border text-[#F5F7F2] transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 md:rounded-full",
                     isScrolled
-                        ? "bg-[#080A08]/95"
-                        : "bg-[#080A08]/90",
+                        ? "border-[#3D5427] bg-[#080A08]/65 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.28)]"
+                        : "border-[#28321E] bg-[#080A08]/90 backdrop-blur-none shadow-none",
                 )}>
                 <div className="grid grid-cols-[1fr_auto] items-center gap-x-4 px-5 py-3 sm:px-7 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-x-5 lg:px-6 lg:py-3.5 xl:gap-x-8 xl:px-8">
                     <a href="#" className={twMerge(`flex w-fit items-center gap-2.5 font-serif text-[21px] font-bold tracking-[-0.04em] sm:text-[24px] ${glassHover}`, glassSurface)}>

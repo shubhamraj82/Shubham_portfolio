@@ -22,6 +22,12 @@ export default function Hero() {
             style={{ scale: heroScale, opacity: heroOpacity }}
             className="relative isolate min-h-screen overflow-x-clip px-2 py-32 sm:py-36 lg:min-h-[1000px] lg:py-44"
         >
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#3D5427]/70 to-transparent" />
+                <div className="absolute left-1/2 top-[-10rem] h-[34rem] w-[min(90vw,70rem)] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(75,113,18,0.18)_0%,rgba(8,10,8,0)_68%)] blur-2xl" />
+                <div className="absolute left-[12%] top-[34%] size-[20rem] rounded-full bg-[#B7FF3C]/[0.035] blur-[110px]" />
+                <div className="absolute right-[8%] top-[18%] size-[24rem] rounded-full bg-[#4B7112]/[0.09] blur-[120px]" />
+            </div>
             <div className="container relative z-10 mx-auto">
                 <motion.div 
                 drag
@@ -86,11 +92,11 @@ export default function Hero() {
                  </p>
                  <div className="relative -top-2 mt-9 flex flex-col justify-center gap-3 sm:mt-11 sm:flex-row sm:gap-4">
                     <a href="#projects" className="group inline-flex rounded-full bg-[#4B7112] pb-2 shadow-[0_0_22px_rgba(183,255,60,0.18)] transition-shadow duration-200 hover:shadow-[0_0_32px_rgba(183,255,60,0.3)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B7FF3C]">
-                        <span className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[#B7FF3C] px-8 font-sans text-base font-semibold text-[#080A08] shadow-[inset_0_2px_0_#E5FFB8,inset_0_-3px_0_#689817] transition-[transform,background-color,box-shadow] duration-150 group-hover:-translate-y-0.5 group-active:translate-y-1.5 group-active:bg-[#F78900] group-active:shadow-[inset_0_1px_0_#FFE5C4,inset_0_-3px_0_#915100]">
+                        <span className="uppercase inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[#B7FF3C] px-8 font-sans text-base font-semibold text-[#080A08] shadow-[inset_0_2px_0_#E5FFB8,inset_0_-3px_0_#689817] transition-[transform,background-color,box-shadow] duration-150 group-hover:-translate-y-0.5 group-active:translate-y-1.5 group-active:bg-[#F78900] group-active:shadow-[inset_0_1px_0_#FFE5C4,inset_0_-3px_0_#915100]">
                             View my projects <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </span>
                     </a>
-                    <a href="#contact" className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#28321E] bg-[#0B100B] px-8 font-sans text-base font-semibold text-[#F5F7F2] transition-all duration-300 hover:border-[#3D5427] hover:bg-[#14210F] hover:text-[#B7FF3C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B7FF3C]">
+                    <a href="#contact" className=" uppercase inline-flex min-h-14 items-center justify-center rounded-full border border-[#28321E] bg-[#0B100B] px-8 font-sans text-base font-semibold text-[#F5F7F2] transition-all duration-300 hover:border-[#3D5427] hover:bg-[#14210F] hover:text-[#B7FF3C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B7FF3C]">
                         Contact me
                     </a>
                  </div>

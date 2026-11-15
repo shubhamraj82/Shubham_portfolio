@@ -24,6 +24,7 @@ const achievements = [
       "Finished 4th in the Stack Hack 2.0 Hackathon, competing with 200+ participants.",
     Icon: Trophy,
     actionLabel: "Show GitHub",
+    actionHref: "https://github.com/shubhamraj82",
     ActionIcon: Code2,
     secondaryActionLabel: "Show certificate",
     SecondaryActionIcon: ExternalLink,
@@ -34,6 +35,7 @@ const achievements = [
     description: "Earned a global rank of 1480 in a LeetCode Weekly Contest.",
     Icon: Medal,
     actionLabel: "View LeetCode profile",
+    actionHref: "https://leetcode.com/u/shubhamraj8216/",
     ActionIcon: ExternalLink,
     secondaryActionLabel: undefined,
     SecondaryActionIcon: undefined,
@@ -45,6 +47,7 @@ const achievements = [
       "Solved 600+ data structures and algorithms problems across LeetCode and GeeksforGeeks, placing in the top 3%.",
     Icon: Code2,
     actionLabel: "View LeetCode profile",
+    actionHref: "https://leetcode.com/u/shubhamraj8216/",
     ActionIcon: ExternalLink,
     secondaryActionLabel: undefined,
     SecondaryActionIcon: undefined,
@@ -57,6 +60,7 @@ function TimelineMilestone({
   description,
   Icon,
   actionLabel,
+  actionHref,
   ActionIcon,
   secondaryActionLabel,
   SecondaryActionIcon,
@@ -159,15 +163,17 @@ function TimelineMilestone({
             {description}
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <button
-              type="button"
+            <a
+              href={actionHref}
+              target="_blank"
+              rel="noreferrer"
               className="group inline-flex rounded-full bg-black pb-1.5 shadow-[0_0_18px_rgba(255,255,255,0.12)] transition-shadow duration-200 hover:shadow-[0_0_26px_rgba(255,255,255,0.22)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
               <span className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 font-sans text-sm font-semibold text-black shadow-[inset_0_2px_0_#fff,inset_0_-3px_0_#b8b8b8] transition-[transform,background-color,box-shadow] duration-150 group-hover:-translate-y-0.5 group-active:translate-y-1 group-active:bg-[#D9D9D9] group-active:shadow-[inset_0_1px_0_#fff,inset_0_-3px_0_#888]">
                 {actionLabel}
                 <ActionIcon aria-hidden="true" className="size-3.5" />
               </span>
-            </button>
+            </a>
             {secondaryActionLabel && SecondaryActionIcon ? (
               <button
                 type="button"

@@ -13,6 +13,7 @@ import AnimatedList from "./AnimatedList";
 
 type ProfileMenuItem = {
   label: string;
+  href?: string;
   icon?: typeof UserRound | typeof FileDown;
   brandIcon?: (typeof GithubIcon) | (typeof InstagramIcon) | (typeof Linkedin01Icon) | (typeof TwitterIcon);
 };
@@ -43,10 +44,10 @@ const ProfileAnimatedList = AnimatedList as unknown as ComponentType<ProfileAnim
 
 const menuItems = [
   { label: "About me", icon: UserRound },
-  { label: "GitHub", brandIcon: GithubIcon },
+  { label: "GitHub", href: "https://github.com/shubhamraj82", brandIcon: GithubIcon },
   { label: "Instagram", brandIcon: InstagramIcon },
-  { label: "Twitter", brandIcon: TwitterIcon },
-  { label: "LinkedIn", brandIcon: Linkedin01Icon },
+  { label: "Twitter", href: "https://x.com/ShubhamRaj42327", brandIcon: TwitterIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/shubham-raj-2bb9652b2", brandIcon: Linkedin01Icon },
   { label: "Download resume", icon: FileDown },
 ];
 
@@ -90,7 +91,16 @@ export default function ProfileSidebarCard() {
           renderItem={(item, _index, selected) => {
             const Icon = "icon" in item ? item.icon : null;
             return (
-              <>
+              <a
+                href={item.href}
+                target={item.href ? "_blank" : undefined}
+                rel={item.href ? "noreferrer" : undefined}
+                onClick={(event) => {
+                  if (!item.href) event.preventDefault();
+                }}
+                className="flex w-full items-center gap-3"
+                aria-label={item.href ? `${item.label} (opens in a new tab)` : undefined}
+              >
                 {item.brandIcon ? (
                   <HugeiconsIcon
                     icon={item.brandIcon}
@@ -110,7 +120,7 @@ export default function ProfileSidebarCard() {
                 >
                   {item.label}
                 </span>
-              </>
+              </a>
             );
           }}
           initialSelectedIndex={-1}

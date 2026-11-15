@@ -19,26 +19,32 @@ import "./contact.css";
 const socials = [
   {
     label: "Email",
-    value: "your.email@gmail.com",
-    href: "mailto:your.email@gmail.com",
+    value: "raj.subham3004@gmail.com",
+    href: "mailto:raj.subham3004@gmail.com",
     icon: Mail,
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/your-profile",
-    href: "https://linkedin.com/",
+    value: "linkedin.com/in/shubham-raj-2bb9652b2",
+    href: "https://www.linkedin.com/in/shubham-raj-2bb9652b2",
     icon: Linkedin,
   },
   {
     label: "GitHub",
-    value: "github.com/your-username",
-    href: "https://github.com/",
+    value: "github.com/shubhamraj82",
+    href: "https://github.com/shubhamraj82",
+    icon: Github,
+  },
+  {
+    label: "LeetCode",
+    value: "leetcode.com/u/shubhamraj8216",
+    href: "https://leetcode.com/u/shubhamraj8216/",
     icon: Github,
   },
   {
     label: "X / Twitter",
-    value: "@yourusername",
-    href: "https://x.com/",
+    value: "@ShubhamRaj42327",
+    href: "https://x.com/ShubhamRaj42327",
     icon: X,
   },
 ];
@@ -67,7 +73,7 @@ export default function ContactSection() {
       `Hi,\n\n${message}\n\nFrom: ${name}\nReply to: ${email}`,
     );
     setStatus("Opening your email application...");
-    window.location.href = `mailto:your.email@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:raj.subham3004@gmail.com?subject=${subject}&body=${body}`;
   }
 
   return (
