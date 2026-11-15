@@ -147,7 +147,7 @@ function TimelineMilestone({
       >
         <span
           aria-hidden="true"
-          className="grid size-11 shrink-0 place-items-center rounded-xl border border-[#B7FF3C]/20 bg-[#B7FF3C]/10 text-[#B7FF3C] sm:size-12"
+          className="grid size-11 shrink-0 place-items-center rounded-xl border border-white/20 bg-white/[0.08] text-white sm:size-12"
         >
           <Icon className="size-5 sm:size-[22px]" strokeWidth={1.8} />
         </span>
@@ -158,21 +158,25 @@ function TimelineMilestone({
           <p className="mt-2 text-sm leading-6 text-[#A6ADA3] sm:text-[15px]">
             {description}
           </p>
-          <div className="mt-5 flex flex-wrap gap-2">
+          <div className="mt-5 flex flex-wrap gap-3">
             <button
               type="button"
-              className="inline-flex h-9 items-center gap-2 rounded-lg border border-[#B7FF3C]/30 bg-[#B7FF3C]/10 px-3.5 text-xs font-semibold text-[#B7FF3C] transition-colors hover:border-[#B7FF3C]/60 hover:bg-[#B7FF3C]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B7FF3C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#121612]"
+              className="group inline-flex rounded-full bg-black pb-1.5 shadow-[0_0_18px_rgba(255,255,255,0.12)] transition-shadow duration-200 hover:shadow-[0_0_26px_rgba(255,255,255,0.22)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
-              {actionLabel}
-              <ActionIcon aria-hidden="true" className="size-3.5" />
+              <span className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 font-sans text-sm font-semibold text-black shadow-[inset_0_2px_0_#fff,inset_0_-3px_0_#b8b8b8] transition-[transform,background-color,box-shadow] duration-150 group-hover:-translate-y-0.5 group-active:translate-y-1 group-active:bg-[#D9D9D9] group-active:shadow-[inset_0_1px_0_#fff,inset_0_-3px_0_#888]">
+                {actionLabel}
+                <ActionIcon aria-hidden="true" className="size-3.5" />
+              </span>
             </button>
             {secondaryActionLabel && SecondaryActionIcon ? (
               <button
                 type="button"
-                className="inline-flex h-9 items-center gap-2 rounded-lg border border-[#B7FF3C]/30 bg-[#B7FF3C]/10 px-3.5 text-xs font-semibold text-[#B7FF3C] transition-colors hover:border-[#B7FF3C]/60 hover:bg-[#B7FF3C]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B7FF3C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#121612]"
+                className="group inline-flex rounded-full bg-black pb-1.5 shadow-[0_0_18px_rgba(255,255,255,0.12)] transition-shadow duration-200 hover:shadow-[0_0_26px_rgba(255,255,255,0.22)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >
-                {secondaryActionLabel}
-                <SecondaryActionIcon aria-hidden="true" className="size-3.5" />
+                <span className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 font-sans text-sm font-semibold text-black shadow-[inset_0_2px_0_#fff,inset_0_-3px_0_#b8b8b8] transition-[transform,background-color,box-shadow] duration-150 group-hover:-translate-y-0.5 group-active:translate-y-1 group-active:bg-[#D9D9D9] group-active:shadow-[inset_0_1px_0_#fff,inset_0_-3px_0_#888]">
+                  {secondaryActionLabel}
+                  <SecondaryActionIcon aria-hidden="true" className="size-3.5" />
+                </span>
               </button>
             ) : null}
           </div>
@@ -213,12 +217,9 @@ export default function AchievementSection() {
 
       <div className="relative mx-auto max-w-5xl">
         <header className="mb-16 text-center sm:mb-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#B7FF3C] sm:text-sm">
-            My Journey
-          </p>
           <h2
             id="achievements-heading"
-            className="mt-3 text-4xl font-semibold tracking-[-0.045em] text-[#F5F7F2] sm:text-5xl md:text-6xl"
+            className="bg-[linear-gradient(180deg,#A6ADA3_0%,#F5F7F2_100%)] bg-clip-text text-5xl font-bold uppercase tracking-[0.12em] text-transparent sm:text-6xl md:text-7xl"
           >
             Achievements
           </h2>

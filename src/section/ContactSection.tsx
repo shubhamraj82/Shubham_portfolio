@@ -80,7 +80,6 @@ export default function ContactSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_50%,rgba(183,255,60,0.14),transparent_45%)]" />
         <div className="portal-grid absolute inset-0 opacity-[0.12]" />
       </div>
 

@@ -32,17 +32,17 @@ const projects: Project[] = [
   {
     name: "Agentsurf",
     description:
-      "A visual browser-automation platform for building, running, and observing AI-powered workflows. Create a workflow on a node-based canvas, connect browser and communication steps, and run the graph as a durable background task.",
+      "A multi-organizational AI-powered browser automation platform for building, executing, and monitoring intelligent workflows. Features a visual node-based canvas to design automation pipelines, AI-driven browser interactions, web data extraction, and integrated communication workflows. Built with organization-level workspace isolation, durable background execution, automatic retries, real-time monitoring, and collaborative workflow management.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Clerk", "PostgreSQL", "Browserbase", "Liveblocks", "Trigger", "Resend", "Polar"],
-    category: "Web",
+    category: "AI",
     previewImage: "/images/Neon Workflow Editor at Night.png",
     demoLabel: "Live Demo",
   },
   {
     name: "Resonance",
     description:
-      "A multi-tenant text-to-speech workspace for turning written content into expressive audio, with organization-owned voices and a focused listening experience.",
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Clerk", "Cloudflare R2", "ChatterBox-TTS"],
+      "An AI-powered, multi-tenant text-to-speech and voice cloning platform that transforms written content into expressive, natural-sounding audio using customizable voice profiles. Features organization-specific voice libraries, custom voice uploads, configurable speech generation parameters, and an intuitive audio playback experience. Built with secure organization-level data isolation, subscription-based access and usage tracking, authenticated audio storage, and reliable generation workflows.",
+    technologies: ["Next.js", "TypeScript","Tailwind CSS","Shadcn/UI", "PostgreSQL","tRPC", "Prisma", "Clerk", "Cloudflare R2", "ChatterBox-TTS","Polar","Sentry"],
     category: "Web",
     previewImage: "/images/Resonance AI Dashboard Interface.png",
     demoLabel: "Live Demo",
@@ -51,59 +51,12 @@ const projects: Project[] = [
     name: "Requestly",
     description:
       "A collaborative API workspace with team workspaces, clear request organization, and AI assistance to speed up testing and debugging.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Better Auth", "PostgreSQL", "Prisma", "tRPC"],
-    category: "Web",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS","Shadcn/UI", "Better Auth", "PostgreSQL", "Prisma", "tRPC","Zustand"],
+    category: "AI",
     previewImage: "/images/Neon AI-Powered API Workspace.png",
     demoLabel: "View Details",
   },
-  {
-    name: "Aura Brand Identity",
-    description:
-      "A personal identity exploration shaped around a calm, modern visual system, with a flexible mark, refined typography, and a cohesive digital presence.",
-    technologies: ["Figma", "Illustrator", "Photoshop", "Brand Strategy", "Visual Design"],
-    category: "Mobile",
-    demoLabel: "View Details",
-  },
-  {
-    name: "Pocket Places",
-    description:
-      "A mobile guide for saving favorite places, organizing them into personal lists, and finding a great spot while on the move.",
-    technologies: ["React Native", "Expo", "TypeScript", "Maps", "NativeWind"],
-    category: "Mobile",
-    demoLabel: "Live Demo",
-  },
-  {
-    name: "Daily Form",
-    description:
-      "A gentle habit and wellness companion that turns small daily check-ins into clear, encouraging progress over time.",
-    technologies: ["React Native", "Expo", "TypeScript", "Firebase", "Figma"],
-    category: "Mobile",
-    demoLabel: "View Details",
-  },
-  {
-    name: "Solaris Digital",
-    description:
-      "A client project for a clean-energy studio, bringing its solar services, project portfolio, and customer journey together in a confident digital experience.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Figma"],
-    category: "AI",
-    demoLabel: "Live Demo",
-  },
-  {
-    name: "Workflow Copilot",
-    description:
-      "An AI assistant that turns plain-language goals into practical, reviewable workflow steps and helps teams automate routine work.",
-    technologies: ["Python", "OpenAI API", "FastAPI", "PostgreSQL", "LangChain"],
-    category: "AI",
-    demoLabel: "View Details",
-  },
-  {
-    name: "Knowledge Lens",
-    description:
-      "A conversational knowledge tool that helps people explore their documents and get grounded answers with useful source context.",
-    technologies: ["Next.js", "TypeScript", "Embeddings", "Vector Search", "PostgreSQL"],
-    category: "AI",
-    demoLabel: "View Details",
-  },
+
 ];
 
 function StackedProjectCard({
@@ -165,19 +118,27 @@ function StackedProjectCard({
         <p className="mt-3 max-w-4xl text-sm leading-relaxed text-[#A6ADA3] sm:text-[15px] md:mt-4 md:text-base">
           {project.description}
         </p>
-        <ul className="mt-4 flex flex-wrap gap-1.5 sm:mt-5 sm:gap-2" aria-label={`${project.name} technologies and tools`}>
+        <ul className="mt-4 flex flex-wrap gap-2 sm:mt-5" aria-label={`${project.name} technologies and tools`}>
           {project.technologies.map((technology) => (
-            <li key={technology} className="rounded-full border border-[#28321E] bg-white/[0.035] px-2.5 py-1 text-[10px] leading-4 text-[#A6ADA3] sm:px-3 sm:text-xs">
+            <li
+              key={technology}
+              className="inline-flex items-center gap-2 rounded-full border border-[#B7FF3C]/20 bg-[#121612] px-3 py-1.5 text-[10px] font-medium leading-none tracking-[0.02em] text-[#D9E2D1] transition-colors duration-200 hover:border-[#B7FF3C]/50 hover:bg-[#1B2416] hover:text-[#F5F7F2] sm:px-3.5 sm:text-xs"
+            >
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-[#B7FF3C]/70" />
               {technology}
             </li>
           ))}
         </ul>
-        <div className="mt-auto flex flex-wrap gap-2.5 pt-5 sm:gap-3 sm:pt-6">
-          <a href="#projects" className="inline-flex h-9 items-center gap-2 rounded-full bg-[#B7FF3C] px-3.5 text-xs font-semibold text-[#080A08] transition hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B7FF3C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080A08] sm:h-10 sm:px-4 sm:text-sm">
-            <ExternalLink aria-hidden="true" className="size-3.5" /> {project.demoLabel}
+        <div className="mt-auto flex flex-wrap justify-center gap-2.5 pt-10 sm:gap-3 sm:pt-12">
+          <a href="#projects" className="group inline-flex rounded-full bg-[#4B7112] pb-1.5 shadow-[0_0_18px_rgba(183,255,60,0.16)] transition-shadow duration-200 hover:shadow-[0_0_26px_rgba(183,255,60,0.28)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B7FF3C]">
+            <span className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-[#B7FF3C] px-4 font-sans text-sm font-semibold text-[#080A08] shadow-[inset_0_2px_0_#E5FFB8,inset_0_-3px_0_#689817] transition-[transform,background-color,box-shadow] duration-150 group-hover:-translate-y-0.5 group-active:translate-y-1 group-active:bg-[#F78900] group-active:shadow-[inset_0_1px_0_#FFE5C4,inset_0_-3px_0_#915100]">
+              <ExternalLink aria-hidden="true" className="size-3.5" /> {project.demoLabel}
+            </span>
           </a>
-          <a href="#projects" aria-label={`${project.name} GitHub repository`} className="inline-flex h-9 items-center gap-2 rounded-full border border-[#28321E]/45 px-3.5 text-xs font-medium text-[#F5F7F2] transition hover:border-[#28321E] hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#28321E] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080A08] sm:h-10 sm:px-4 sm:text-sm">
-            <Code2 aria-hidden="true" className="size-3.5" /> GitHub
+          <a href="#projects" aria-label={`${project.name} GitHub repository`} className="group inline-flex rounded-full bg-[#4B7112] pb-1.5 shadow-[0_0_18px_rgba(183,255,60,0.16)] transition-shadow duration-200 hover:shadow-[0_0_26px_rgba(183,255,60,0.28)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B7FF3C]">
+            <span className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-[#B7FF3C] px-4 font-sans text-sm font-semibold text-[#080A08] shadow-[inset_0_2px_0_#E5FFB8,inset_0_-3px_0_#689817] transition-[transform,background-color,box-shadow] duration-150 group-hover:-translate-y-0.5 group-active:translate-y-1 group-active:bg-[#F78900] group-active:shadow-[inset_0_1px_0_#FFE5C4,inset_0_-3px_0_#915100]">
+              <Code2 aria-hidden="true" className="size-3.5" /> GitHub
+            </span>
           </a>
         </div>
       </div>
