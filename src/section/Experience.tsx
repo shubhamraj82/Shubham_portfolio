@@ -1,10 +1,72 @@
-import { CalendarDays, MapPin } from "lucide-react";
-import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
+"use client";
+
+import { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "motion/react";
+import { HoverHighlightText } from "@/components/HoverHighlightText";
 
 const milestones = ["2022", "2023", "2024", "2025", "2026"];
+const currentMilestoneProgress = milestones.indexOf("2023") / milestones.length;
 
+function TimelineMarker({
+  progress,
+  threshold,
+  active,
+}: {
+  progress: MotionValue<number>;
+  threshold: number;
+  active: boolean;
+}) {
+  const reduceMotion = useReducedMotion();
+  const fillProgress = useTransform(
+    progress,
+    [threshold, Math.min(1, threshold + 0.16)],
+    [0, 1],
+  );
+  const fill = useTransform(fillProgress, [0, 1], ["#080A08", "#B7FF3C"]);
+
+  return (
+    <motion.span
+      aria-hidden="true"
+      className={`absolute -top-[7px] left-2 size-3.5 rounded-full border ${
+        active
+          ? "border-[#B7FF3C] shadow-[0_0_18px_rgba(183,255,60,0.55)]"
+          : "border-[#78846F]"
+      }`}
+      style={{
+        backgroundColor: reduceMotion ? (active ? "#B7FF3C" : "#080A08") : fill,
+      }}
+    />
+  );
+}
 
 export default function Experience() {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 72%", "end 38%"],
+  });
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+  const lineScale = reduceMotion ? 1 : progress;
+  const roleReveal = useTransform(
+    progress,
+    [currentMilestoneProgress, currentMilestoneProgress + 0.16],
+    [0, 1],
+  );
+  const roleOpacity = useTransform(roleReveal, [0, 0.5], [0, 1]);
+  const roleY = useTransform(roleReveal, [0, 1], [22, 0]);
+
   return (
     <section
       id="experience"
@@ -23,6 +85,10 @@ export default function Experience() {
         >
           Experience
         </h2>
+        <p className="mx-auto -mt-8 mb-14 max-w-xl text-center font-serif text-sm leading-6 text-[#C0C6BC] sm:-mt-10 sm:mb-16 sm:text-base sm:leading-7">
+          Turning ideas into reliable, elegant products through thoughtful
+          engineering and collaboration.
+        </p>
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-0">
         <div className="flex min-w-0 flex-col justify-between lg:-ml-3 lg:min-h-[620px] lg:py-8 lg:pr-12 xl:pr-20">
           <div>
@@ -34,38 +100,32 @@ export default function Experience() {
                 <br />
                 <span className="text-[#B6D79A]">what’s next.</span>
               </h3>
-              <p className="max-w-xs pt-1 font-serif text-sm leading-6 text-[#C0C6BC] sm:pt-2 sm:text-base sm:leading-7">
-                Turning ideas into reliable, elegant products through thoughtful
-                engineering and collaboration.
-              </p>
             </div>
           </div>
 
-          <div className="mt-12 lg:mt-16">
+          <div ref={timelineRef} className="mt-12 lg:mt-16">
             <div className="relative overflow-hidden">
               <span
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 h-1 bg-[#4A5942]"
               />
-              <span
+              <motion.span
                 aria-hidden="true"
-                className="experience-timeline-sweep absolute left-0 top-0 h-1 w-1/4 bg-gradient-to-r from-transparent via-[#B7FF3C] to-transparent shadow-[0_0_8px_rgba(183,255,60,0.85)]"
+                className="absolute left-0 top-0 h-1 w-full origin-left bg-[#B7FF3C] shadow-[0_0_8px_rgba(183,255,60,0.85)]"
+                style={{ scaleX: lineScale }}
               />
               <ol className="grid grid-cols-5" aria-label="Career timeline">
-                {milestones.map((year) => {
+                {milestones.map((year, index) => {
                   const isCurrentRole = year === "2023";
                   return (
                     <li
                       key={year}
                       className="relative flex flex-col items-start pt-4"
                     >
-                      <span
-                        aria-hidden="true"
-                        className={`absolute -top-[7px] left-2 size-3.5 rounded-full border ${
-                          isCurrentRole
-                            ? "border-[#B7FF3C] bg-[#B7FF3C] shadow-[0_0_18px_rgba(183,255,60,0.55)]"
-                            : "border-[#78846F] bg-[#080A08]"
-                        }`}
+                      <TimelineMarker
+                        progress={progress}
+                        threshold={index / milestones.length}
+                        active={isCurrentRole}
                       />
                       <span
                         className={`pl-1 text-xs tracking-[0.08em] ${
@@ -80,7 +140,10 @@ export default function Experience() {
               </ol>
             </div>
 
-            <article className="relative ml-[20%] mt-5 border-l border-[#526044] pl-5 sm:pl-7">
+            <motion.article
+              className="relative ml-[20%] mt-5 border-l border-[#526044] pl-5 sm:pl-7"
+              style={reduceMotion ? undefined : { opacity: roleOpacity, y: roleY }}
+            >
               <span
                 aria-hidden="true"
                 className="absolute -top-5 left-[-1px] h-5 w-px bg-[#B7FF3C]/70"
@@ -93,24 +156,26 @@ export default function Experience() {
                 may 2023 - jun 2023
               </p>
               
-            </article>
+            </motion.article>
           </div>
         </div>
 
         <div className="flex min-h-[300px] items-center justify-center px-0 py-4 sm:min-h-[360px] sm:px-6 lg:min-h-[620px] lg:px-10">
-          <CardContainer className="w-full" containerClassName="w-full py-0">
-          <CardBody className="h-auto w-full max-w-[42rem] rounded-[10px] border-2 border-[#777D75] bg-[#26312E] px-5 py-5 text-[#D6D0C4] shadow-[0_18px_55px_rgba(0,0,0,0.16)] transition-shadow duration-300 dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] sm:px-7 sm:py-6">
-            <CardItem translateZ={35} className="mt-2 flex w-full flex-wrap items-center gap-x-3 gap-y-1.5 font-serif text-[10px] text-[#B6B4A9] sm:text-[11px]">
-             
-              <span aria-hidden="true" className="text-[#A7A493]">•</span>
-            </CardItem>
-            <CardItem translateZ={20} as="ul" className="mt-5 w-full space-y-2 font-serif text-[12px] leading-[1.5] text-[#D2CCBF] sm:mt-6 sm:text-[13px]">
-              <li className="flex gap-3"><span aria-hidden="true" className="mt-[0.45em] size-1 shrink-0 rounded-full bg-[#B8AB84]" />Built an Android ride application with real-time location tracking for 50+ active users.</li>
-              <li className="flex gap-3"><span aria-hidden="true" className="mt-[0.45em] size-1 shrink-0 rounded-full bg-[#B8AB84]" />Implemented JWT authentication and secure API communication.</li>
-              <li className="flex gap-3"><span aria-hidden="true" className="mt-[0.45em] size-1 shrink-0 rounded-full bg-[#B8AB84]" />Optimized maps and background location updates for smoother navigation.</li>
-            </CardItem>
-          </CardBody>
-          </CardContainer>
+          <div className="w-full max-w-[42rem] text-black">
+          <div className="w-full rounded-tl-none rounded-tr-[40px] rounded-br-none rounded-bl-[40px] bg-white px-6 py-7 sm:px-9 sm:py-9">
+            <div className="w-full font-serif text-[10px] text-black sm:text-[11px]">
+              <HoverHighlightText
+                text="Android Ride Application"
+                className="text-base font-semibold tracking-wide text-black sm:text-lg"
+              />
+            </div>
+            <ul className="mt-5 w-full space-y-2 font-serif text-[12px] leading-[1.5] text-black sm:mt-6 sm:text-[13px]">
+              <li className="flex gap-3"><span aria-hidden="true" className="mt-[0.45em] size-1 shrink-0 rounded-full bg-black" /><HoverHighlightText text="Built an Android ride application with real-time location tracking for 50+ active users." /></li>
+              <li className="flex gap-3"><span aria-hidden="true" className="mt-[0.45em] size-1 shrink-0 rounded-full bg-black" /><HoverHighlightText text="Implemented JWT authentication and secure API communication." /></li>
+              <li className="flex gap-3"><span aria-hidden="true" className="mt-[0.45em] size-1 shrink-0 rounded-full bg-black" /><HoverHighlightText text="Optimized maps and background location updates for smoother navigation." /></li>
+            </ul>
+          </div>
+          </div>
       </div>~
         </div>
       </div>
